@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=chrome">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+       city: <input type="text" v-model="cityName">
+      </div>
+      <script>
+        var vm = new Vue({
+          el: '#app',
+          data: {
+            cityName: 'shanghai'
+          },
+         
+        })
+      </script>
+
+
+
+</body>
+</html>
