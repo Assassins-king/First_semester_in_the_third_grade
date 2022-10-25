@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title> 
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <parent></parent>
+  </div>
+
+  <template id="child">
+    <div>
+      <button @click="click">Send</button>
+      <input type="text" v-model="message">
+    </div>
+  </template>
+  
+  <script>
+    Vue.component('parent', {
+      template: '<div><child @childFn="transContent"></child>' +
+                  '子组件传来的值 : {{message}}</div>',
+      data () {
+        return {
+          message: ''
+        }
+      },
+      methods: {
+        transContent (payload) {
+          this.message = payload
+        }
+      }
+    })
+    // child组件
+    Vue.component('child', {
+      template: '#child',
+      data () {
+        return {
+          message: '子组件的消息'
+        }
+      },
+      methods: {
+        click () {
+          this.$emit('childFn', this.message);
+        }
+      }
+    })
+    var vm = new Vue({ el: '#app' })
+ </script>
+</body>
+</html>

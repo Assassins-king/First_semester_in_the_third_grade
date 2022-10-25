@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    /* 图形的初始状态 */
+    .chart {
+      width: 200px;
+      height: 50px;
+      background-color: orange;
+    }
+    /* 进入和离开的过程 */
+    .box-enter-active, .box-leave-active {
+      transition: width 3s;  /* width的变化，动画时间是3秒 */
+    }
+    /* 进入初始状态 和 离开的结束状态*/
+    .box-enter, .box-leave-to {
+      width: 0px;
+    } 
+    /* 进入的结束状态 和 离开的初始状态 */
+    .box-enter-to, .box-leave {
+      width: 200px;
+    }
+  </style>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="toggle">改变图形宽度</button>
+    <transition name="box">
+      <div class="chart" v-if="show"></div>
+    </transition>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        show: true,
+      },
+      methods: {
+        toggle () {
+          this.show = !this.show   // 每次都取反
+        }
+      }
+    })
+ </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title> 
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>{{title}}</p>
+    <my-component></my-component>
+  </div>
+
+  <template id="tmp1">
+    <p>{{title}}</p>
+  </template>
+
+  <script>
+    Vue.component('my-component', {
+      template: '#tmp1',
+      data () {
+        return {
+          title: '我是组件内的title',
+        }
+      }
+    })
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        title: '我是vm实例的title'
+      }
+    })
+  </script>
+</body>
+</html>

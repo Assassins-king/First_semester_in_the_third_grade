@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-on:keyup.enter="submit">
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      methods: {
+        submit () {
+          console.log('表单提交')
+        }
+      }
+    })
+  </script>
+</body>
+</html>

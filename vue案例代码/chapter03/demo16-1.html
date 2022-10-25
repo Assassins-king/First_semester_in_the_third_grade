@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <script>
+    // 定义myMixin对象
+    var myMixin = {
+      created () {
+        this.hello()
+      },
+      methods: {
+        hello () {
+          console.log('hello from mixin!')
+        }
+      }
+    }
+    var Component = Vue.extend({
+      mixins: [myMixin]
+    })
+    var component = new Component()
+  </script>
+</body>
+</html>

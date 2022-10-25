@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <my-component>成功渲染</my-component>
+  </div>
+  <script>
+    Vue.component('my-component', {
+      render (createElement) {
+        return createElement('p', {
+          style: {
+            color: 'red',
+            fontSize: '16px',
+            backgroundColor: '#eee'
+          }
+        }, this.$slots.default)
+      }
+    })
+    var vm = new Vue({ el: '#app' })
+  </script>
+</body>
+</html>

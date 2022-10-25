@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<div id="root">
+    <h1>学生年龄：真实{{student.age.rage}},对外{{student.age.sage}}</h1>
+    <h2>朋友们：</h2>
+    <ul>
+        <li v-for="(f,index) in student.friends" ::key="index">
+            {{f.name}}--{{f.age}}
+        </li>
+    </ul>
+
+</div>
+
+
+
+
+    <script type="text/javascript">
+
+
+const vm=new Vue({
+    el:'#root',
+    data:{
+        name:'111',
+        address:'222',
+        student:{
+            name:'tom',
+            age:{
+                rage:40,
+                sage:20,
+            },
+            friends:[
+                {name:'jerry',age:35},
+                {name:'tony',age:23},
+            ]
+        }
+    }
+})
+    </script>
+    
+</body>
+</html>

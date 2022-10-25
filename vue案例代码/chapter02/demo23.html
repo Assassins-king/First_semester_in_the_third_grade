@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .Odiv1 {width: 80px; height: 80px; background: #aaa; margin:5px;}
+    .Odiv2 {width: 50px; height: 50px; background: #ccc;}
+  </style>  
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div class="Odiv1" v-on:click.self="doParent">a
+      <div class="Odiv2" v-on:click="doThis">b</div>
+    </div>
+    <div class="Odiv1" v-on:click="doParent">c
+      <div class="Odiv2" v-on:click.self="doThis">d</div>
+    </div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      methods: { 
+        doParent () {
+          console.log('我是父元素的单击事件')
+        },
+        doThis () {
+          console.log('我是当前元素的单击事件')
+        }
+      }
+    })
+  </script>
+</body>
+</html>

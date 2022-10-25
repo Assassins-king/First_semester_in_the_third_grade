@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-focus="true">
+  </div>
+  <script>
+    Vue.directive('focus', {
+      inserted (el, binding) {
+        if (binding.value) {
+          el.focus()
+        }
+      }
+    })
+    var vm = new Vue({ el: '#app' })
+ </script>
+</body>
+</html>

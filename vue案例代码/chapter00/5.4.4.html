@@ -1,0 +1,24 @@
+<script>
+  var date = new Date();              // 基于当前时间创建Date对象
+  console.log(date.toString());       // 示例结果：Fri Oct 06 2017 11:53:04 GMT+0800 (中国标准时间)
+  console.log(date.getFullYear());    // 示例结果：2017
+  console.log(date.getMonth());       // 示例结果：9
+  console.log(date.getDate());        // 示例结果：6
+</script>
+
+<script>
+  // 方式1：分别传入年、月、日、时、分、秒（月的范围是0~11，即真实月份-1）
+  var date1 = new Date(2017, 9, 1, 11, 53, 4);
+  console.log(date1.toString());    // 返回结果：Sun Oct 01 2017 11:53:04 GMT+0800 (中国标准时间)
+  // 方式2：通过字符串传入日期和时间
+  var date2 = new Date('2017-10-01 11:53:04');
+  console.log(date2.toString());    // 返回结果：Sun Oct 01 2017 11:53:04 GMT+0800 (中国标准时间)
+</script>
+
+<script>
+  console.log(new Date('2017'));         // Sun Jan 01 2017 08:00:00 GMT+0800 (中国标准时间)
+  console.log(new Date(2017, 9));        // Sun Oct 01 2017 00:00:00 GMT+0800 (中国标准时间)
+  console.log(new Date(2017, -1));       // Thu Dec 01 2016 00:00:00 GMT+0800 (中国标准时间)
+  console.log(new Date(2017, 12));       // Mon Jan 01 2018 00:00:00 GMT+0800 (中国标准时间)
+  console.log(new Date(2017, 0, 0));     // Sat Dec 31 2016 00:00:00 GMT+0800 (中国标准时间)
+</script>

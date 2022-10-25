@@ -1,0 +1,8 @@
+<script>
+  var p1 = {name: 'Jim', age: 19};
+  var p2 = p1;
+  p2.name = 'Tom';
+  console.log(p1);           // 输出结果：Object {name: "Tom", age: 19}
+  console.log(p2);           // 输出结果：Object {name: "Tom", age: 19}
+  console.log(p1 === p2);    // 输出结果：true
+</script>

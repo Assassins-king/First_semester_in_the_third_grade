@@ -1,0 +1,15 @@
+<script>
+  var o5 = {};                           // 创建一个空对象
+  o5.name = 'Jack';                      // 为对象增加属性
+  o5.introduce = function () {           // 为对象增加方法
+    alert('My name is ' + this.name);    // 在方法中使用this代表当前对象
+  };
+  alert(o5.name);           // 访问name属性，输出结果：Jack
+  o5.introduce();           // 调用introduce()方法，输出结果：My name is Jack 
+</script>
+
+<script>
+  var o6 = {};              // 创建一个空对象
+  var key = 'id';           // 通过变量保存要操作的属性名
+  o6[key] = 123;            // 相当于“o6['id'] = 123”或“o6.id = 123”
+</script>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    /* 数字圆圈样式 */
+    .list-item {
+      display: inline-block;
+      margin-right: 10px;
+      background-color: red;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      text-align: center;
+      line-height: 25px;
+      color: #fff;
+    }
+    /* 插入或移除元素的过程 */
+    .list-enter-active, .list-leave-active {
+      transition: all 1s;
+    }
+    /* 开始插入或移除结束的位置变化 */
+    .list-enter, .list-leave-to {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+  </style>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="add">随机插入一个数字</button>
+    <button @click="remove">随机移除一个数字</button>
+    <transition-group name="list" tag="p">
+      <span v-for="item in items" :key="item" class="list-item">
+        {{item}}
+      </span>
+    </transition-group>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        items: [1, 2, 3, 4, 5], 	// 定义数字数组
+        nextNum: 6				        // 下一个数字从6开始
+      },
+      methods: {
+        randomIndex () {
+          return Math.floor(Math.random() * this.items.length)
+        },
+        add () {		   // 单击“随机插入一个数字”时触发
+          this.items.splice(this.randomIndex(), 0, this.nextNum++)
+        },
+        remove () {		 // 单击“随机移除一个数字”时触发
+          this.items.splice(this.randomIndex(), 1)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

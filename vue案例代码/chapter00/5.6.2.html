@@ -1,0 +1,92 @@
+<script>
+  function Person(name) {
+    this.name = name;
+  }
+  Person.prototype.sayHello = function () {
+    console.log('你好，我是' + this.name);
+  }
+  var p1 = new Person('Jim');
+  var p2 = new Person('Tom');
+  p1.sayHello();    // 输出结果：你好，我是Jim
+  p2.sayHello();    // 输出结果：你好，我是 Tom
+</script>
+
+<script>
+  function Person() {}            // 构造函数Person原本有一个原型对象prototype
+  Person.prototype = {            // 将构造函数的prototype属性指向一个新的对象
+    sayHello: function () {       // 在新的对象中定义一个sayHello()方法用于测试
+      console.log('你好，我是新对象');
+    }
+  }
+  var p = new Person();
+  p.sayHello();                   // 输出结果：你好，我是新对象
+</script>
+
+<script>
+  function Person() {}
+  Person.prototype.sayHello = function() {
+    console.log('原来的对象');
+  }
+  var p1 = new Person();
+  Person.prototype = {
+    sayHello: function(){
+      console.log('替换后的对象');
+  }
+  }
+  var p2 = new Person();
+  p1.sayHello();        // 输出结果：原来的对象
+  p2.sayHello();        // 输出结果：替换后的对象
+</script>
+
+<script>
+  var obj = {
+    sayHello: function(){
+      console.log('我是一个带有sayHello方法的对象');
+    }
+  };
+  var newObj = Object.create(obj);
+  newObj.sayHello();           // 输出结果：我是一个带有sayHello方法的对象
+  newObj.__proto__ === obj;    // 返回结果：true
+</script>
+
+<script>
+  var o1 = {};
+  var o2 = {name: 'Jim'};
+  o1.name = o2.name;           // o1继承o2的name属性
+  console.log(o1.name);        // 输出结果：Jim
+</script>
+
+<script>
+  // 编写extend函数
+  function extend(o1, o2) {
+    for (var k in o2) {
+      o1[k] = o2[k];
+    }
+  }
+  // 测试extend函数
+  var o1 = {name: 'Jim'};
+  var o2 = {age: 16, gender: 'male'};
+  extend(o1, o2);              // 将o2的成员添加给o1
+  console.log(o1.name);        // 输出结果：Jim
+  console.log(o1.age);         // 输出结果：16
+</script>
+
+<script>
+  function Person(options) {
+    // 调用前面编写的extend()，将传入的options对象的成员添加到实例对象中
+    extend(this, options); 
+  }
+  Person.fn = Person.prototype;    // 将prototype属性简化为fn方便代码书写
+  Person.fn.extend = function(obj) {
+    extend(this, obj);             // 此处的this相当于Person.prototype
+  };
+  Person.fn.extend({
+    sayHello: function() {
+      console.log('你好，我是' + (this.name || '无名'));
+    }
+  });
+  var p1 = new Person();
+  var p2 = new Person({name: '张三', age:16});
+  p1.sayHello();    // 输出结果：你好，我是无名
+  p2.sayHello();    // 输出结果：你好，我是张三
+</script>

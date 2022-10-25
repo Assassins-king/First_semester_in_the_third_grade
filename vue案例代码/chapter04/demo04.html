@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    div.circular {
+      width: 100px;
+      height: 100px;
+      background: red;
+      border-radius: 50%;
+      margin-top: 20px;
+      text-align: center;
+      line-height: 100px;
+      color: #fff;
+    }
+    .bounce-enter-active {
+      animation: Ami .5s;
+    }
+    .bounce-leave-active {
+      animation: Ami .5s;
+    }
+    @keyframes Ami {
+      0% {transform: scale(0); background: red;}
+      20% {transform: scale(1); background: burlywood;}
+      50% {transform: scale(1.5); background: blueviolet;}
+      100% {transform: scale(1); background: burlywood;}
+    }
+  </style>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="show=!show">使用@keyframes创建CSS动画</button>
+    <transition name="bounce">
+      <div class="circular" v-if="show">圆形</div>
+    </transition>
+  </div>
+  <script>
+    var vm = new Vue({ el: '#app', data: { show: true } })
+  </script>
+</body>
+</html>

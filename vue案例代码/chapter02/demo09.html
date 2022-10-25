@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .box {
+      background-color: pink;
+      width: 100%;
+      height: 200px;
+    }
+    .inner {
+      background-color: red;
+      width: 100px;
+      height: 50px;
+      border: 2px solid white;
+    }
+  </style>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div v-bind:class="{box}">我是box
+      <div v-bind:class="{inner}">我是inner1</div>
+      <div v-bind:class="{inner}">我是inner2</div>
+    </div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        box: 'box',
+        inner: 'inner'
+      }
+    })
+  </script>
+</body>
+</html>

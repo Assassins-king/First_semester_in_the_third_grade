@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div v-on:click="doParent">
+      <button v-on:click="doThis">事件冒泡</button>
+      <button v-on:click.stop="doThis">阻止事件冒泡</button>
+    </div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      methods: { 
+        doParent () {
+          console.log('我是父元素单击事件')
+        },
+        doThis () {
+          console.log('我是被单击元素事件')
+        }
+      }
+    })
+  </script>
+</body>
+</html>

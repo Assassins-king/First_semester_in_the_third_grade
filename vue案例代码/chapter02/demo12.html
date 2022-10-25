@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div v-html="msg"></div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        msg: '<h2>我是v-html</h2>'
+      }
+    })
+  </script>
+</body>
+</html>

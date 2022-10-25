@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="velocity.js"></script>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <input placeholder="请输入要查找的内容" v-model="query">
+    <fade :query="query" :items="items">
+      <li v-for="(item, index) in ComputedList" :key="item.msg"
+       :data-index="index">
+        {{ item.msg }}
+      </li>
+    </fade>
+  </div>  
+  
+  <script>
+    Vue.component('fade', {
+      functional: true,	  // 标记fade组件为函数式组件 
+      props: ['query', 'items'],
+      render (h, ctx) {
+        var data = {
+          props: {			  // props组件
+            tag: 'ul',		// 修改默认渲染的span标签为ul
+            css: false
+          },
+          on: {
+            beforeEnter (el) {
+              el.style.opacity = 0
+              el.style.height = 0
+            },
+            enter (el, done) {
+              var delay = el.dataset.index * 150
+              setTimeout(function () {
+                Velocity(el, { opacity: 1, height: '1.6em' }, { complete: done })
+              }, delay)
+            },
+            leave (el, done) {
+              var delay = el.dataset.index * 150
+              setTimeout(function () {
+                Velocity(el, { opacity: 0, height: 0 }, { complete: done })
+              }, delay)
+            }
+          }
+        }
+        // data是传递给组件的数据对象，作为createElement()的第2个参数传入组件
+        // ctx.children是VNode子节点的数组
+        return h('transition-group', data,ctx.children)
+      }
+    })
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        query: '',
+        items: [
+          { msg: '张三' },
+          { msg: '李四' },
+          { msg: '张芳芳' },
+          { msg: '王琳琳' },
+          { msg: '冯圆' }
+        ]
+      },
+      computed: {
+        ComputedList () {
+          var vm = this.query
+          var nameList = this.items 
+          return nameList.filter(function (item) {
+            return item.msg.toLowerCase().indexOf(vm.toLowerCase()) !== -1
+          })
+        }
+      }
+    })
+  </script>
+</body>
+</html>

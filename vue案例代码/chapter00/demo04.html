@@ -1,0 +1,10 @@
+<script>
+  var o = {};
+  try {                  // 在try中编写可能出现错误的代码
+    o.func();
+    console.log('a');    // 如果前面的代码出错，这行代码不会执行
+  } catch(e) {          // 在catch中捕获错误，e表示错误对象
+    console.log(e);
+  }
+  console.log('b');      // 如果错误已经被处理，这行代码会执行
+</script>

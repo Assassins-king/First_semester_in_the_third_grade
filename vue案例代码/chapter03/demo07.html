@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>{{base}}</p>
+    <p>{{noBase}}</p>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      customOption: '我是自定义数据',
+      data: {
+        base: '我是基础数据' 
+      },
+      created () {
+        this.noBase = this.$options.customOption
+      }
+    })
+ </script>
+</body>
+</html>

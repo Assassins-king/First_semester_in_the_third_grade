@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title> 
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">{{msg}}</div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: { msg: '张三' },
+      beforeMount () {
+        console.log('挂载之前')
+        console.log(this.$el.innerHTML) // 通过this.$el获取el的DOM元素
+      },
+      mounted () {
+        console.log('挂载之后')
+        console.log(this.$el.innerHTML)
+      }
+    })
+ </script>
+</body>
+</html>

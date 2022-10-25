@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .fade-enter, .fade-leave-to { opacity: 0; }
+    .fade-enter-active, .fade-leave-active { transition: opacity .5s; }
+  </style>  
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <transition name="fade" mode="out-in">
+      <button :key="isOff" @click="isOff = !isOff">{{isOff ? 'Off' : 'On'}}</button>
+    </transition>
+  </div>
+  <script>
+    var vm = new Vue({ el: '#app', data: { isOff: false } })
+  </script>
+</body>
+</html>

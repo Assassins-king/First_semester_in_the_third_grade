@@ -1,0 +1,20 @@
+<script>
+  function Person(name) {
+    this.name = name;
+    this.sayHello = function() {
+      console.log(this.name);
+    };
+  }
+  // 为Person对象添加静态成员
+  Person.age = 123;
+  Person.sayGood = function() {
+    console.log(this.age);
+  };
+  // 构造函数使用的成员是静态成员
+  console.log(Person.age);    // 使用静态属性age，输出结果：123
+  Person.sayGood();           // 使用静态方法sayGood()，输出结果：123
+  // 由构造函数创建的对象使用的成员是实例成员
+  var p = new Person('Tom');
+  console.log(p.name);        // 使用实例属性name，输出结果：Tom
+  p.sayHello();               // 使用实例方法sayHello()，输出结果：Tom
+</script>

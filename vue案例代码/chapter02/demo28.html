@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title> 
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <my-parent name="title"></my-parent>
+  </div>
+  <script>
+    Vue.component('my-parent',{
+      props: ['name'],
+      template: '<div>我是父组件{{name}}</div>'
+    })
+    var vm = new Vue({
+      el: '#app'
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="isEditing = !isEditing">切换保存和编辑按钮</button>
+    <div>
+      <transition name="fade">
+        <button v-if="isEditing" key="save">保存</button>
+        <button v-else key="edit">编辑</button>
+      </transition>
+    </div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: { isEditing: true }
+    })
+  </script>
+</body>
+</html>

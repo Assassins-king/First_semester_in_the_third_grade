@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <my-component></my-component>
+  </div>
+  <script>
+    Vue.component('my-component', {
+      template: '<button @click="root">查看根实例</button>',
+      methods: {
+        root () {
+          console.log(this.$root)
+          console.log(this.$root === vm.$root)
+        }
+      }
+    })
+    var vm = new Vue({ el: '#app' })
+  </script>
+</body>
+</html>

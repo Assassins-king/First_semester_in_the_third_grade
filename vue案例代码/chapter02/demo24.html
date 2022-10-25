@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title> 
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button v-on:click.once="doThis">只执行一次</button>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      methods: {
+        doThis () {
+          console.log('我是当前元素的单击事件且只执行一次')
+        }
+      }
+    })
+  </script>
+</body>
+</html>

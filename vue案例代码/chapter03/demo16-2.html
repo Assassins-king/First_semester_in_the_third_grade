@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <script>
+    var mixin = {
+      data () {
+        return { message: 'hello' }
+      }
+    }
+    var vm = new Vue({
+      mixins: [mixin],
+      data () {
+        return { message: 'goodbye' }
+      },
+      created () {
+        console.log(this.$data.message) // 输出结果：goodbye
+      }
+    })
+  </script>
+</body>
+</html>

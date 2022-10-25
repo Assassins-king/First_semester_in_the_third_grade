@@ -1,0 +1,31 @@
+<script>
+  function Person() {
+    var name = 'Jim';
+    this.getName = function () {
+      return name;
+    };
+  }
+  var p = new Person();    // 创建实例对象p
+  console.log(p.name);     // 访问私有成员，输出结果：undefined
+  p.getName();             // 访问对外开放的成员，输出结果：Jim
+</script>
+
+<script>
+  // 返回基本类型数据
+  function Person() {
+    obj = this;
+    return 123;
+  }
+  var obj, p = new Person();
+  console.log(p === obj);    // true
+</script>
+
+<script>
+  // 返回引用类型数据
+  function Person() {
+    obj = this;
+    return {};
+  }
+  var obj, p = new Person();
+  console.log(p === obj);    // false
+</script>

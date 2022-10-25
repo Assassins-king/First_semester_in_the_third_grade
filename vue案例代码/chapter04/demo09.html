@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .row-enter { width: 0px; }
+    .row-enter-active { transition: width 3s;  }
+    .row-enter-to{ width: 200px; }
+    .red { background: red; height: 20px; }
+    .blue { background: blue; height: 20px;  }
+    .yellow { background: yellow; height: 20px;  }
+  </style>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="showNum">切换</button>
+    <div>
+      <transition name="row">
+        <div class="red" v-if="show == 'A'" key="A"></div>
+        <div class="blue" v-if="show == 'B'" key="B"></div>
+        <div class="yellow" v-if="show == 'C'" key="C"></div>
+      </transition>
+    </div>
+  </div>
+  <script>
+  var vm = new Vue({
+    el: '#app',
+    data: { show: 'A' }, // 初始化show的值为A
+    methods: {
+      showNum () {
+        if (this.show == 'A') {
+          return this.show = 'B'
+        } else if (this.show == 'B') {
+          return this.show = 'C'
+        } else {
+          return this.show = 'A'
+        }
+      }
+    }
+  })
+  </script>
+</body>
+</html>

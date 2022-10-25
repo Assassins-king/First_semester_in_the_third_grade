@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <script>
+    var mixin = {
+      created () {
+        console.log('mixin钩子调用')
+      }
+    }
+    var vm = new Vue({
+      mixins: [mixin],
+      created () {
+        console.log('组件钩子调用')
+      }
+    })
+  </script>
+</body>
+</html>

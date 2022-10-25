@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div>{{message | toUpcase}}</div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        message: 'helloworld'
+      },
+      filters: {
+        // 将 helloworld 转换为 HELLOWORLD
+        toUpcase (value) {
+          return value ? value.toUpperCase() : ''
+        }
+      }
+    })
+  </script>
+</body>
+</html>

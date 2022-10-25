@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <my-component>你好
+      <template v-slot:second>
+        <div>内部结构</div>
+      </template>
+    </my-component>
+  </div>
+
+  <template id="first">
+    <div>
+      <slot></slot>
+      <slot name="second"></slot>
+    </p>
+  </template>
+
+  <script>
+    Vue.component('my-component', { template: '#first' })
+    var vm = new Vue({ el: '#app' })
+    // 在控制台查看插槽内容
+    console.log(vm.$children[0].$slots.second[0].children[0].text)
+  </script>
+</body>
+</html>

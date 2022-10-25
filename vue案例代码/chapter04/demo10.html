@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <transition name="fade">
+      <span v-bind:key="show">{{ showNum }}</span>
+    </transition>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: { show: 'B' },
+      computed: {
+        showNum () {
+          switch (this.show) {
+            case 'A': return '我是a'
+            case 'B': return '我是b'
+            case 'C': return '我是c'
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="add">添加学生</button>
+    <button @click="del">删除学生</button>
+    <table border="1" width="50%" style="border-collapse: collapse">
+      <tr>
+        <th>班级</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>年龄</th>
+      </tr>
+      <tr align="center" v-for="item in students">
+        <td>{{item.grade}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.gender}}</td>
+        <td>{{item.age}}</td>
+      </tr>
+    </table>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        students: []
+      },
+      methods: {
+        // 添加学生信息
+        add () {
+          var student = {grade: '1', name: '张三', gender: '男', age: 25}
+          this.students.push(student)
+        },
+        // 删除学生信息
+        del () {
+          this.students.pop()
+        }
+      }
+    })
+  </script>
+</body>
+</html>

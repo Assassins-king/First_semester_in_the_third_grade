@@ -1,0 +1,12 @@
+<script>
+  var obj = {name: 'Tom', age: 16};
+  for (var k in obj) {
+    console.log(k + '-' + obj[k]);
+  }
+</script>
+
+<script>
+  var obj = {name: 'Tom', age: 16};
+  console.log('name' in obj);      // 输出结果：true
+  console.log('gender' in obj);    // 输出结果：false
+</script>

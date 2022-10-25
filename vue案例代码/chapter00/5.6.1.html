@@ -1,0 +1,25 @@
+<script>
+  function Person(name) {
+    this.name = name;
+    this.introduce = function() {};
+  }
+  var p1 = new Person('Jim');
+  var p2 = new Person('Alice');
+  console.log(p1.introduce == p2.introduce);    // 输出结果：false
+</script>
+
+<script>
+  function Person() {}                          // 定义函数
+  console.log(typeof Person.prototype);         // 输出结果：object
+</script>
+
+<script>
+  function Person(name) {
+    this.name = name;
+  }
+  Person.prototype.introduce = function() {};
+  var p1 = new Person('Jim');
+  var p2 = new Person('Alice');
+  console.log(p1.introduce);                     // 输出结果：function () {}
+  console.log(p1.introduce === p2.introduce);    // 输出结果：true
+</script>

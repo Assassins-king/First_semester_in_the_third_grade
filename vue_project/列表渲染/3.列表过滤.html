@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>人员列表</title>
+</head>
+<body>
+    <h1>人员列表</h1>
+
+   
+    <div id='root'>
+        <input type="text" placeholder="请输入名字"  v-model="keyword"></input>
+        <ul>
+            <li v-for="(p,index) in fpersons" :key="index">
+                {{p.name}}-{{p.sex}}-{{p.age}}
+            </li>
+        </ul>
+    </div>
+    
+    <!-- <script>
+        new Vue({
+            el: '#root',
+            data: {
+                keyword:'',
+                persons: [{
+                    id: '001',
+                    name: '张三',
+                    age: 18,
+                    sex:'男'
+                }, {
+                    id: '002',
+                    name: '李四',
+                    age: 19,
+                    sex:'男'
+                }, {
+                    id: '003',
+                    name: '王五',
+                    age: 20,
+                    sex:'男'
+                }],
+                lpersons:[]
+            },
+            watch:{
+                keyword:{
+                    immediate:true,
+                    handler(val){
+                        this.lpersons=this.persons.filter((p)=>{
+                        return p.name.indexOf(val)!==-1
+                    })
+                    }
+                    
+                }
+            }
+        
+        })
+    </script> -->
+
+
+    <script>
+         new Vue({
+            el: '#root',
+            data: {
+                keyword:'',
+                persons: [{
+                    id: '001',
+                    name: '张三',
+                    age: 18,
+                    sex:'男'
+                }, {
+                    id: '002',
+                    name: '李四',
+                    age: 19,
+                    sex:'男'
+                }, {
+                    id: '003',
+                    name: '王五',
+                    age: 20,
+                    sex:'男'
+                }],
+
+            },
+            computed:{
+                fpersons(){
+                    return this.persons.filter((p)=>{
+                        return p.name.indexOf(this.keyword)!==-1
+                    })
+                }
+            }
+        
+        })
+    </script>
+</body>
+</html>

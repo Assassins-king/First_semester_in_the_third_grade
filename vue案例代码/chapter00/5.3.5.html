@@ -1,0 +1,34 @@
+<script>
+  function foo() {
+    return this;
+  }
+  var o = {name: 'Jim', func: foo};
+  console.log(foo() === window);    // 输出结果：true
+  console.log(o.func() === o);      // 输出结果：true
+</script>
+
+<script>
+  function method() {
+    console.log(this.name);
+  }
+  method.apply({name: '张三'});     // 输出结果：张三
+  method.call({name: '李四'});      // 输出结果：李四
+</script>
+
+<script>
+  function method(a, b) {
+    console.log(a + b);
+  }
+  method.apply({}, ['1', '2']);     // 数组方式传参，输出结果：12
+  method.call({}, '3', '4');        // 参数方式传参，输出结果：34
+</script>
+
+<script>
+  function method(a, b) {
+    console.log(this.name + a + b);
+  }
+  var name = '张三';
+  var test = method.bind({name: '李四'}, '3', '4');
+  method('1', '2');	    // 输出结果：张三12
+  test();               // 输出结果：李四34
+</script>

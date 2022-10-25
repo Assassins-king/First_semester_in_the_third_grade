@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>对象增加成员</title>
+  </head>
+  <body>
+    <input id="k" type="text" value="name">
+    <input id="v" type="text" value="Jack">
+    <input id="btn" type="button" value="test">
+    <script>
+      var k = document.getElementById('k');
+      var v = document.getElementById('v');
+      var btn = document.getElementById('btn');
+      var o = {};
+      btn.onclick = function () {
+        o[k.value] = v.value;
+        console.log(o);    // 输出结果：Object {name: "Jack"}
+      };
+    </script>
+  </body>
+</html>

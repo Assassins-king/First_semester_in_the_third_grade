@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="child">查看子组件</button>
+    <my-component></my-component>
+  </div>
+  <script>
+    Vue.component('my-component', {template: '<div>myComponent</div>'})
+    var vm = new Vue({
+      el: '#app',
+      methods: {
+        child () {
+          console.log(this.$children)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

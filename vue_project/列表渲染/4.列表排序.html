@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>4.列表排序</title>
+</head>
+<body>
+    <h1>4.列表排序</h1>
+
+   
+    <div id='root'>
+        <input type="text" placeholder="请输入名字"  v-model="keyword"></input>
+        <button @click="sortType=2">年龄升序</button>
+        <button @click="sortType=1">年龄降序</button>
+        <button @click="sortType=0">原顺序</button>
+        <ul>
+            <li v-for="(p,index) in fpersons" :key="p.id">
+                {{p.name}}-{{p.sex}}-{{p.age}}
+            </li>
+        </ul>
+    </div>
+    
+    <!-- <script>
+        new Vue({
+            el: '#root',
+            data: {
+                keyword:'',
+                persons: [{
+                    id: '001',
+                    name: '张三',
+                    age: 18,
+                    sex:'男'
+                }, {
+                    id: '002',
+                    name: '李四',
+                    age: 19,
+                    sex:'男'
+                }, {
+                    id: '003',
+                    name: '王五',
+                    age: 20,
+                    sex:'男'
+                }],
+                lpersons:[]
+            },
+            watch:{
+                keyword:{
+                    immediate:true,
+                    handler(val){
+                        this.lpersons=this.persons.filter((p)=>{
+                        return p.name.indexOf(val)!==-1
+                    })
+                    }
+                    
+                }
+            }
+        
+        })
+    </script> -->
+
+
+    <script>
+         new Vue({
+            el: '#root',
+            data: {
+                keyword:'',
+                sortType:0,//0原顺序，1降序，2升序
+                persons: [{
+                    id: '001',
+                    name: '张三',
+                    age: 18,
+                    sex:'男'
+                }, {
+                    id: '002',
+                    name: '李四',
+                    age: 19,
+                    sex:'男'
+                }, {
+                    id: '003',
+                    name: '王五',
+                    age: 20,
+                    sex:'男'
+                }],
+
+            },
+            computed:{
+
+                fpersons(){
+                    const arr= this.persons.filter((p)=>{
+                        return p.name.indexOf(this.keyword)!==-1
+                    })
+
+                    //判断是否需要排序
+                    if(this.sortType){
+                        arr.sort((a,b)=>{
+                            return this.sortType===1?b.age-a.age:a.age-b.age
+                        })
+
+                    }
+                    return arr
+                }
+            }
+        
+        })
+    </script>
+</body>
+</html>

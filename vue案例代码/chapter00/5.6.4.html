@@ -1,0 +1,21 @@
+<script>
+  function Person() {
+    this.name = '张三';
+  }
+  Person.prototype.name = '李四';
+  var p = new Person();
+  console.log(p.name);            // 输出结果：张三
+  delete p.name;                  // 删除对象p的name属性
+  console.log(p.name);            // 输出结果：李四
+  delete Person.prototype.name;   // 删除原型对象的name属性
+  console.log(p.name);            // 输出结果：undefined
+</script>
+
+<script>
+  function Person() {}
+  Person.prototype.name = '李四';
+  var p = new Person();
+  p.name = '张三';
+  console.log(p.name);                   // 输出结果：张三
+  console.log(Person.prototype.name);    // 输出结果：李四
+</script>

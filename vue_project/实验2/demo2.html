@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+  
+        <div class="compare">
+          <ul>
+            <li>数据1：<input type="text" v-model="num1"></li>
+            <li>数据2：<input type="text" v-model="num2"></li>
+            <li><input type="button" value="比较" @click='compare()'></li>
+          </ul>
+          <div class="result">{{result}}</div>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+          el: '#app',
+    
+          data: {
+            num1: '',
+            num2: '',
+            result: ''
+          },
+        
+          methods: {
+            compare() {
+              if (!this.num1 || !this.num2) {
+                this.result = '输入的数不能为空'
+              } else {
+                this.result = parseInt(this.num1) == parseInt(this.num2) ? '两个数相等' : parseInt(this.num1) > parseInt(this.num2) ? '数据1大于数据2' : '数据2大于数据1'
+              }
+            }
+          }
+        })
+      </script>
+
+
+
+
+</body>
+</html>

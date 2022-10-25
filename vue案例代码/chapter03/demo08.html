@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>我是根标签结构</p>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app'
+    })
+    vm.$el.innerHTML = '<div>我是替换后的div标签</div>'
+  </script>
+</body>
+</html>

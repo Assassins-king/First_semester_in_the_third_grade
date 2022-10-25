@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <transition>
+      <ul v-if="items.length > 0">
+        <li>项目1</li>
+        <!-- 项目... -->
+      </ul>
+      <p v-else>抱歉，没有找到您查找的内容。</p>
+    </transition>
+  </div>  
+  <script>
+    var vm = new Vue({ el: '#app', data: { items: [] } })
+  </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <my-component>
+      <template v-slot:header>
+        <div style="background-color:#ccc;height:50px">
+          这里是导航栏
+        </div>
+      </template>
+      <template v-slot:content>
+        <div style="background-color:#ddd;height:50px">
+          这里是内容区域
+        </div>
+      </template>
+      <template v-slot:footer>
+        <div style="background-color:#eee;height:50px">
+          这里是底部信息
+        </div>
+      </template>
+    </my-component>
+  </div>
+  <script>
+    Vue.component('my-component', {
+      render (createElement) {
+        return createElement('div', [
+          createElement('header', this.$slots.header),
+          createElement('content', this.$slots.content),
+          createElement('footer', this.$slots.footer)
+        ])
+      }
+    })
+    var vm = new Vue({ el: '#app' })
+  </script>
+</body>
+</html>

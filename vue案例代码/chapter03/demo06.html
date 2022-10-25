@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- 父组件 -->
+    <my-parent></my-parent>
+  </div>
+
+  <!-- 父组件模板 -->
+  <template id="parent">
+    <div>
+      <h3>手机信息搜索</h3>
+      手机品牌：<input type="text" v-model="brand">
+      <!-- 子组件 -->
+      <my-child v-bind:name="brand"></my-child>
+    </div>
+  </template>
+
+  <!-- 子组件模板 -->
+  <template id="child">
+    <ul>
+      <li>手机品牌：{{show.brand}}</li>
+      <li>手机型号：{{show.type}}</li>
+      <li>市场价格：{{show.price}}</li>
+    </ul>
+  </template>
+
+  <script>
+    Vue.component('my-parent', {
+      template: '#parent',
+      data () {
+        return {
+          brand: ''
+        }
+      }
+    })
+    Vue.component('my-child', {
+      template: '#child',
+      data () {
+        return {
+          content: [
+            {brand: '华为', type: 'Mate20', price: 3699},
+            {brand: '苹果', type: 'iPhone7', price: 2949},
+            {brand: '三星', type: 'Galaxy S8+', price: 3299},
+            {brand: 'vivo', type: 'Z5x', price: 1698},
+            {brand: '一加', type: 'OnePlus7', price: 2999},
+            {brand: '360', type: 'N7 Pro', price: 1099},
+            {brand: 'oppo', type: 'Reno', price: 2599}
+          ],
+          show: {brand: '', type: '', price: ''}
+        }
+      },
+      props: ['name'],
+      watch: {
+        name () {
+          if (this.$props.name) {
+            var found = false
+            this.content.forEach((value, index) => {
+              if (value.brand === this.$props.name) {
+                found = value
+              }
+            })
+            this.show = found ? found : {brand: '', type: '', price: ''}
+          } else {
+          return
+        }
+        }
+      }
+    })
+    var vm = new Vue({
+      el: '#app',
+      data: {}
+    })
+ </script>
+</body>
+</html>

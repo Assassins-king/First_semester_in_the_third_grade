@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- input中的v-model用于在表单控件元素上创建双向数据绑定 -->
+    <input type="text" v-model="cityName">
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        cityName: 'shanghai'
+      },
+      // 使用watch监听cityName变化
+      //监听数据变化
+      watch: {
+        cityName (newName, oldName) {
+          console.log(newName, oldName)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

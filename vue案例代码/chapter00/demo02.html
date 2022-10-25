@@ -1,0 +1,15 @@
+<script>
+  function deepCopy(obj) {
+    var o = {};
+    for (var k in obj) {
+      o[k] = (typeof obj[k] === 'object') ? deepCopy(obj[k]) : obj[k];
+    }
+    return o;
+  }
+  var p1 = {name: 'Jim', subject: {name: ['HTML', 'CSS']} };
+  var p2 = deepCopy(p1);
+  p2.subject.name[0] = 'JavaScript';
+  console.log(p1.subject.name[0]);    // 输出结果：HTML
+  console.log(p2.subject.name[0]);    // 输出结果：JavaScript
+  console.log(p1 === p2);             // 输出结果：false
+</script>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title> 
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div ref="self">test</div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: { msg: '张三' },
+      beforeDestroy () {
+        console.log('销毁之前')
+        console.log(this.$refs.self)
+        console.log(this.msg)
+        console.log(vm)
+      },
+      destroyed () {
+        console.log('销毁之后')
+        console.log(this.$refs.self)
+        console.log(this.msg)
+        console.log(vm)
+      }
+    })
+    // 在控制台执行：vm.$destroy()，查看效果
+ </script>
+</body>
+</html>

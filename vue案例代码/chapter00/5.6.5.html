@@ -1,0 +1,81 @@
+<script>
+  function Person() {}
+  Person.prototype.constructor === Person;    // 返回结果：true
+</script>
+
+<script>
+  function Person() {}
+  new Person().constructor === Person;        // 返回结果：true
+</script>
+
+<script>
+  function Person() {}
+  new Person().constructor.prototype === Person.prototype;    // 返回结果：true
+</script>
+
+<script>
+  function Person() {}
+  Person.constructor.toString();      // 返回结果：function Function() { [native code] }
+  Person.constructor === Function;    // 返回结果：true
+  String.constructor === Function;    // 返回结果：true
+  Number.constructor === Function;    // 返回结果：true
+  Object.constructor === Function;    // 返回结果：true
+  Function.constructor === Function;  // 返回结果：true
+</script>
+
+<script>
+  // new Function('参数1', '参数2', …… '参数N', '函数体');
+  var func = new Function('a', 'b', 'return a + b;');
+  console.log(func(100, 200));    // 输出结果：300
+</script>
+
+<script>
+  var func = function(a, b) {
+    return a + b;
+  };
+</script>
+
+<script>
+  function Person() {}
+  new Person().__proto__ === Person.prototype;        // 返回结果：true
+</script>
+
+<script>
+  Person.prototype.__proto__ === Object.prototype;    // 返回结果：true
+</script>
+
+<script>
+  Object.prototype.__proto__;                         // 返回结果：null
+  Object.__proto__ === Function.prototype;            // 返回结果：true
+</script>
+
+<script>
+  function Person() {}
+  function Func() {}
+  Person.prototype = new Func();
+  var p1 = new Person();
+  p1.constructor === Func;                        // 返回结果：true
+  p1.constructor.prototype === Func.prototype;    // 返回结果：true
+  p1.__proto__ === Person.prototype;              // 返回结果：true
+</script>
+
+<script>
+  function Person() {}
+  var p1 = new Person();
+  console.log(p1 instanceof Person);    // 输出结果：true
+</script>
+
+<script>
+  function Person() {}
+  function Func() {}
+  var p1 = new Person();
+  Person.prototype = new Func();
+  var p2 = new Person();
+  console.log(p1 instanceof Person);    // 输出结果：false
+  console.log(p2 instanceof Person);    // 输出结果：true
+</script>
+
+<script>
+  p1.__proto__.__proto__ = Person.prototype;
+  console.log(p1 instanceof Person);    // 输出结果：true
+</script>

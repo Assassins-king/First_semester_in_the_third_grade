@@ -1,0 +1,26 @@
+<script>
+  var str = 'HelloWorld';
+  console.log(str.length);                // 获取字符串长度，返回结果：10
+  console.log(str.charAt(5));             // 获取索引位置为5的字符，返回结果：W
+  console.log(str.indexOf('o'));          // 获取“o”在字符串中首次出现的位置，返回结果：4
+  console.log(str.lastIndexOf('o'));      // 获取“o”在字符串中最后出现的位置，返回结果：6
+  console.log(str.substring(5));          // 截取从位置5开始到最后的内容，返回结果：World
+  console.log(str.substring(5, 7));       // 截取从位置5开始到位置7范围内的内容，返回结果：Wo
+  console.log(str.substr(5));             // 截取从位置5开始到最后的内容，返回结果：World
+  console.log(str.substr(5, 2));          // 截取从位置5开始的后面2个字符，返回结果：Wo
+  console.log(str.toLowerCase());         // 将字符串转换为小写，返回结果：helloworld
+  console.log(str.toUpperCase());         // 将字符串转换为大写，返回结果：HELLOWORLD
+  console.log(str.split('l'));            // 使用“l”切割字符串，返回结果：["He", "", "oWor", "d"]
+  console.log(str.split('l', 3));         // 限制最多切割3次，返回结果：["He", "", "oWor"]
+  console.log(str.replace('World', 'JavaScript'));    // 替换字符串，返回结果："HelloJavaScript"
+</script>
+
+<script>
+  var name = 'Administrator';
+  if (name.length < 3 || name.length > 10) {
+    alert('用户名长度必须在3~10之间。');
+  }
+  if (name.toLowerCase().indexOf('admin') !== -1) {
+    alert('用户名中不能包含敏感词：admin。');
+  }
+</script>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity .5s ease;
+    }
+    .fade-enter, .fade-leave-to {
+      opacity: 0;
+    }
+  </style>  
+  <script src="vue.js"></script>
+</head>
+<body>
+  <!-- 定义登录组件 -->
+  <template id="example1">
+    <span>我是登录组件</span>
+  </template>
+  <!-- 定义注册组件 -->
+  <template id="example2">
+    <span>我是注册组件</span>
+  </template>
+  <div id="app">
+    <a href="javascript:;" @click="compontentName='example1'">登录</a>
+    <a href="javascript:;" @click="compontentName='example2'">注册</a>
+    <transition name="fade" mode="in-out">
+      <component :is="compontentName"></component>
+    </transition>
+  </div>
+  <script>
+    Vue.component('example1', {template: '#example1'})
+    Vue.component('example2', {template: '#example2'})
+    var vm = new Vue({
+      el: '#app',
+      data: { compontentName: '' }
+    })
+  </script>
+</body>
+</html>

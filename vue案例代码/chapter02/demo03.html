@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- 为button按钮绑定click事件 -->
+    <button @click="showInfo">请单击</button>
+    <p>{{msg}}</p>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        msg: ''
+      },
+      methods: {
+          // 定义事件处理方法showInfo
+        showInfo () {
+          this.msg = '触发单击事件'
+        }
+      }
+    })
+  </script>
+</body>
+</html>

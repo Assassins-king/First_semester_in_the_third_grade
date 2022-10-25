@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title> 
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">{{msg}}</div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: { msg: '张三' },
+      beforeCreate () {
+        console.log('实例创建之前')
+        console.log(this.$data.msg)
+      },
+      created () {
+        console.log('实例创建之后')
+        console.log(this.$data.msg)
+      }
+    })
+ </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <my-component>你好</my-component>
+  </div>
+
+  <template id="first">
+    <div>
+      <slot></slot>
+    </div>
+  </template>
+  
+  <script>
+    Vue.component('my-component', { template: '#first' })
+    var vm = new Vue({ el: '#app' })
+  </script>
+</body>
+</html>

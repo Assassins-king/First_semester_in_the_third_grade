@@ -18,3 +18,5 @@ for x in range(len(number)-1,-1,-1):
     result+=(list1[list3[x]]+list2[x])
 
 print("转换结果为："+result+"整")
+
+

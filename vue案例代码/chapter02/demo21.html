@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <a href="https://www.baidu.com" v-on:click.prevent>阻止默认行为</a>
+    <a href="https://www.baidu.com">不阻止默认行为</a>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app'
+    })
+  </script>
+</body>
+</html>

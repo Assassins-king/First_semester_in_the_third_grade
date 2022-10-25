@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>{{name}}</p>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        name: '定义初始数据'
+      }
+    })
+  console.log(vm.$data.name)
+  console.log(vm.name)
+  </script>
+</body>
+</html>

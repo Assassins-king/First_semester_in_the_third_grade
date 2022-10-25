@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <transition
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @after-enter="afterEnter"
+      @enter-cancelled="enterCancelled"
+      @before-leave="beforeLeave"
+      @leave="leave"
+      @after-leave="afterLeave"
+      @leave-cancelled="leaveCancelled"
+      v-bind:css="false">
+    </transition>
+  </div>
+  <script>
+    // 具体案例演示可以参考demo15.html
+    var vm = new Vue({
+      el: '#app',
+      methods: {
+        // beforeEnter入场钩子
+        // 动画入场之前，此时动画尚未开始，设置元素开始动画之前的起始样式
+        beforeEnter (el) {},
+        // enter用于设置动画开始之后的样式 
+        enter (el, done) { 
+          // ...
+          done()
+        },
+        // 在入场动画完成之后会调用
+        afterEnter (el) {},
+        enterCancelled (el) {},
+        // 出场钩子
+        beforeLeave (el) {},
+        leave (el, done) {
+          // ...
+          done()
+        },
+        afterLeave (el) {}, 
+        leaveCancelled (el) {},
+      }
+    })
+  </script>
+</body>
+</html>

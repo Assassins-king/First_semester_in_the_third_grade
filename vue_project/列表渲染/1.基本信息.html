@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>persons</h2>
+    <div id='root'>
+        <ul>
+            <li v-for="(person,index) in persons" :key="index">
+                {{person.name}}-{{person.name}}
+            </li>
+        </ul>
+        <h2>car</h2>
+        <ul>
+            <li v-for="(v,k) in cars" ::key='k'>
+                {{k}}-{{v}}
+            </li>
+        </ul>
+        <h2>遍历指定次数</h2>
+        <ul>
+            <li v-for="(number,index) in 5" ::key='index'>
+                {{number}}-{{index}}
+            </li>
+        </ul>
+    </div>
+
+
+
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                persons: [{
+                    id: '001',
+                    name: '张三',
+                    age: 18
+                }, {
+                    id: '002',
+                    name: '李四',
+                    age: 19
+                }, {
+                    id: '003',
+                    name: '王五',
+                    age: 20
+                }],
+                cars: {
+                    name: 'autodi',
+                    price: '111'
+                },
+            }
+        })
+    </script>
+
+
+
+</body>
+
+</html>

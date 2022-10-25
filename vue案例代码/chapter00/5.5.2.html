@@ -1,0 +1,32 @@
+<meta charset="UTF-8">
+
+<script>
+  function foo1() {
+    foo2();
+    console.log('foo1');
+  }
+  function foo2() {
+    var o = {}; 
+    o.func();    // 发生错误
+  }
+</script>
+
+<script>
+  try {
+    foo1();
+  } catch(e) {
+    console.log('test');
+  }
+</script>
+
+<script>
+  try {
+    var e1 = new Error('错误信息');    // 创建错误对象
+    throw e1;                          // 抛出错误对象
+	//也可以与上一行合并为：
+	// throw new Error('错误信息');
+  } catch (e) {
+    console.log(e.message);    // 输出结果：错误信息
+    console.log(e1 === e);     // 判断e1和e是否为同一个对象，输出结果：true
+  }
+</script>

@@ -1,0 +1,8 @@
+<script>
+  var o = {};
+  try{
+    o.func(); 
+  }catch(e){}
+                // 这行代码会出错，因为调用了不存在的方法
+  console.log('test');    // 前面的代码出错时，这行代码不会执行
+</script>

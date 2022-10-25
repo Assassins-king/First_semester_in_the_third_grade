@@ -1,0 +1,32 @@
+<script>
+  function Person(name, age) {
+    this.name = name;                // 添加name属性
+    this.age = age;                  // 添加age属性
+    this.sayHello = function () {    // 添加sayHello()方法
+      console.log('Hello, my name is ' + this.name);
+    };
+  }
+  var p1 = new Person('Jack', 18);
+  var p2 = new Person('Alice', 19);
+  console.log(p1);                  // 输出结果：Person {name: "Jack", age: 18}
+  console.log(p2);                  // 输出结果：Person {name: "Alice", age: 19}
+  p1.sayHello();                    // 输出结果：Hello, my name is Jack
+  console.log(p1.constructor);      // 输出结果：function Person(name, age) ……
+</script>
+
+<script>
+  // 定义类
+  class Person {
+    constructor (name, age, gender) {    // 构造方法
+      this.name = name;                  // 添加name属性
+      this.age = age;                    // 添加age属性
+      this.gender = gender;              // 添加gender属性
+    }
+    introduce() {                        // 定义introduce()方法
+      console.log('我是' + this.name + '，今年' + this.age + '岁。');
+    }
+  }
+  // 实例化时会自动调用constructor()构造方法
+  var p = new Person('Jim', 19, '男');
+  p.introduce();    // 输出结果：我是Jim，今年19岁。
+</script>

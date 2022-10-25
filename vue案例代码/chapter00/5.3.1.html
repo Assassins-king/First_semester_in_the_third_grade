@@ -1,0 +1,12 @@
+<script>
+  function factory(name, age) {
+    var o = {};             // 创建一个空对象
+    o.name = name;          // 添加name属性
+    o.age = age;            // 添加age属性
+    return o;               // 将对象返回
+  }
+  var o1 = factory('Jack', 18);
+  var o2 = factory('Alice', 19);
+  console.log(o1);          // 输出结果： Object {name: "Jack", age: 18}
+  console.log(o2);          // 输出结果： Object {name: "Alice", age: 19}
+</script>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="velocity.js"></script>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="show=!show">动画效果</button>
+    <transition @before-enter="beforeEnter" @enter="enter"
+     @leave="leave" v-bind:css="false">
+      <p v-if="show">文字动画效果</p>
+    </transition>
+  </div>  
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        show: false,
+      },
+      methods: {
+        beforeEnter (el) {
+          el.style.opacity = 0				      // 透明度为0
+          el.style.transformOrigin = 'left'	// 设置旋转元素的基点位置
+          el.style.color = 'red'			    	// 颜色为红色
+        },
+        enter (el, done) {			// duration动画执行时间
+          Velocity(el, { opacity: 1, fontSize: '1.4em' }, { duration: 300 })
+          Velocity(el, { fontSize: '1em' }, { complete: done })
+        },
+        leave (el, done) {
+          Velocity(el, { translateX: '15px', rotateZ: '50deg' },
+          {duration: 3000})
+          Velocity(el, { rotateZ: '100deg' }, { loop: 2 })
+          Velocity(el, { rotateZ: '45deg', translateY: '30px', translateX: '30px', opacity: 0}, { complete: done } )
+        }
+      }
+    })
+  </script>
+</body>
+</html>
