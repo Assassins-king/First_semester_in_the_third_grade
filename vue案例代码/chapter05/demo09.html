@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vue-router.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="goBack">后退</button>
+  </div>
+  <script>
+    var router = new VueRouter()
+    var vm = new Vue({
+      el: '#app',
+      methods: {
+        goBack () {
+          this.$router.go(-1)   // 使用this.$router.go()进行后退操作
+        }
+      },
+      router
+    })
+  </script>
+</body>
+</html>

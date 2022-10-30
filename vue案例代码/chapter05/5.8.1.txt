@@ -1,0 +1,18 @@
+
+// 先获取router实例
+var router = new VueRouter()
+// 字符串形式
+router.push('user')
+// 对象形式
+router.push({ path: '/login?url=' + this.$route.path })
+// 命名路由
+router.push({ name: 'user', params: { userId: 123 }})
+// 带查询参数 /user?id=1
+router.push({ path: 'user', query: { id: '1' }})
+
+
+const userId = '123'
+router.push({ name: 'user', params: { userId }})	// /user/123
+router.push({ path: `/user/${userId}` })           	// /user/123
+// 这里的 params 不生效
+router.push({ path: '/user', params: { userId }})	// /user

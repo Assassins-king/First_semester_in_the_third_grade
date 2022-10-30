@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <script>
+        const school =Vue.extend({
+    template:`
+    <div>
+        <h2>学校名称：{{schoolname}}</h2>
+    <h2>学校地址：{{address}}</h2>
+        </div>
+    
+        `,
+    data() {
+        return {
+            schoolname:'111',
+            address:'222',
+           
+        }
+    },
+})
+
+
+
+
+
+        new Vue({
+            el:'#root',
+            data:{
+               
+            },
+            components:{
+                school
+            },
+            methods: {
+                
+            },
+        })
+           
+       
+    </script>
+</body>
+</html>

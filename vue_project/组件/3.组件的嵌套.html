@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <!-- <app></app> -->
+        
+        <!-- <student></student> -->
+
+    </div>
+
+
+    <script>
+
+        const student=Vue.extend({
+            template:`
+            <div>
+                <h2>学生名称：{{name}}</h2>
+                <h2>学生年龄：{{age}}</h2>
+                </div>
+            `,
+            data() {
+                return {
+                   name:'1111',
+                   age:'18'
+                }
+            },
+        })
+
+        const school=Vue.extend({
+            template:`
+            <div>
+                <h2>学校名称：{{name}}</h2>
+                <h2>学校地址：{{adress}}</h2>
+                <student></student>
+                </div>
+            `,
+            data() {
+                return {
+                   name:'111',
+                   adress:'12122'
+                }
+            },
+            components:{
+               student
+            }
+        })
+
+
+        const hello =Vue.extend({
+            template:`
+            <div>
+                <h1>{{msg}}</h1>
+                </div>
+            `,
+            data() {
+                return {
+                    msg:'111',
+                }
+            },
+        })
+       
+
+
+        const app =Vue.extend({
+            template:`
+            <div>
+                <hello></hello>
+            <school></school>
+                </div>
+            
+            `,
+            components:{
+                school,
+                hello
+            }
+        })
+
+        new Vue({
+            template:`
+            <app></app>
+            `,
+            el:'#root',
+            data:{
+               
+            },
+            components:{
+               app
+            },
+            methods: {
+                
+            },
+        })
+           
+       
+    </script>
+</body>
+</html>

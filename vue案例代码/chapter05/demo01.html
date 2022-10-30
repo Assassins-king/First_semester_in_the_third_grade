@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vue-router.js"></script>
+</head>
+<body>
+  <div id="app">
+    <router-link to="/login" tag="span">前往登录</router-link>
+    <router-view></router-view>
+  </div>
+  <script>
+    // 创建组件
+    var login = {
+      template: '<h1>登录组件</h1>'
+    }
+    var routerObj = new VueRouter({
+      routes: [ 
+        // 配置路由匹配规则
+         {path: '/login', component: login }
+      ]
+    })
+    var vm = new Vue({
+      el: '#app',
+      // 将路由规则对象注册到vm实例上
+      router: routerObj
+    })
+  </script>
+</body>
+</html>

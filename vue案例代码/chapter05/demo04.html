@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    ul, li, h1 {
+      padding: 0;
+      margin: 0; 
+      list-style: none
+    }
+    #app {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+    }
+    ul {
+      width: 200px;
+      flex-direction: column;
+      color: #fff;
+    }
+    li {
+      flex: 1;
+      background: #000;
+      margin:5px auto;
+      text-align: center;
+      line-height: 30px;
+    }
+    .about-detail {
+      flex:1;
+      margin-left: 30px;
+    }
+    .about-detail h1{
+      font-size: 24px;
+      color: blue;
+    }
+  </style>
+  <script src="vue.js"></script>
+  <script src="vue-router.js"></script>
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <router-link to="/about" tag="li">关于公司</router-link>
+      <router-link to="/contact" tag="li">联系我们</router-link>
+    </ul>
+    <router-view></router-view>
+  </div>
+
+  <template id="about-tmp">
+    <div class="about-detail">
+      <h1>北京xx科技有限公司简介</h1>
+      <router-link to="/about/detail">公司简介</router-link> |
+      <router-link to="/about/governance">公司治理</router-link>
+      <router-view></router-view>
+    </div>
+  </template>
+
+  <template id="contact-tmp">
+    <div class="about-detail">
+      <h1>联系我们</h1>
+      <p>公司位于北京市海淀区中关村科技园内，主营业务包括餐饮娱乐、服装设计等</p>
+    </div>
+  </template>
+  
+  <script>
+    // 组件的模板对象
+    var about = { template: '#about-tmp' }
+    var contact = { template: '#contact-tmp' }
+    // 子路由的组件模板对象
+    var detail = {
+      template: '<p>xx是全球领先... ...</p>'
+    }
+    var governance = {
+      template: '<p>公司坚持以客户为中心、以奋斗者为本... ...</p>'
+    }
+    var router = new VueRouter({
+      routes: [
+        { path: '/', redirect: '/about' }, // 路由重定向
+        {
+          path: '/about',
+          component: about,
+          children: [
+            { path: 'detail', component: detail },
+            { path: 'governance', component: governance}
+          ]
+        },
+        { path: '/contact', component: contact }
+      ]
+    })
+    var vm = new Vue({
+      el: '#app',
+      router  // 挂载路由
+    })
+  </script>
+</body>
+</html>

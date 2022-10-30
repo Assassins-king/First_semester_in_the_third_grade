@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../js/vue.js"></script>
-    <title>Document</title>
+    <title>vue.set()的使用</title>
 </head>
 <body>
 <div id="root">
@@ -16,7 +16,9 @@
             {{f.name}}--{{f.age}}
         </li>
     </ul>
-
+    <hr/>
+    <button @click="addSex">添加一个性别属性，默认是男</button>
+    <h2 v-if="student.sex">性别：{{student.sex}}</h2>
 </div>
 
 
@@ -41,7 +43,13 @@ const vm=new Vue({
                 {name:'tony',age:23},
             ]
         }
-    }
+    },
+    methods: {
+        addSex(){
+            //Vue.set(this.student,'sex','男')
+            this.$set(this.student,'sex','男')
+        }
+    },
 })
     </script>
     

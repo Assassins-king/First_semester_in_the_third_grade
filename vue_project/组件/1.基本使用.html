@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <!-- <h2>学校名称：{{schoolname}}</h2>
+        <h2>学校地址：{{address}}</h2> -->
+        <school></school>
+    <hr></hr>
+    <!-- <h2>学生姓名：{{studentname}}</h2>
+    <h2>学生年龄：{{age}}</h2> -->
+    <xuesheng>></xuesheng>
+    <xuesheng></xuesheng>
+    </div>
+</body>
+
+
+
+
+
+<script>
+
+
+
+//创建school组件
+const school =Vue.extend({
+    //el:'#root',
+        // data:{
+       
+        // }
+    template:`
+    <div>
+        <h2>学校名称：{{schoolname}}</h2>
+    <h2>学校地址：{{address}}</h2>
+        </div>
+    
+        `,
+    data() {
+        return {
+            schoolname:'111',
+            address:'222',
+           
+        }
+    },
+})
+
+const student =Vue.extend({
+    template:`
+    <div>
+        <h2>学生姓名：{{studentname}}</h2>
+    <h2>学生年龄：{{age}}</h2>
+        </div>
+    
+    `,
+    data() {
+        return {
+            studentname:'333',
+            age:'12'
+        }
+    },
+})
+
+
+    new Vue({
+        el:'#root',
+        components:{
+            school:school,
+            xuesheng:student,
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,20 @@
+
+npm init -y
+
+npm install vue@2.6.x vue-router@3.1.x
+
+npm install webpack@4.39.x webpack-cli@3.3.x webpack-dev-server@3.8.x html-webpack-plugin@3.2.x -D
+
+npm install vue-loader@15.7.x vue-template-compiler@2.6.x -D
+
+npm install css-loader@3.2.x style-loader@1.0.x -D
+
+npm install less less-loader -D
+
+npm install sass-loader@7.2.x node-sass@4.12.x -D
+
+npm install stylus stylus-loader -D
+
+npm install url-loader@2.1.x file-loader@4.2.x -D
+
+npm run dev

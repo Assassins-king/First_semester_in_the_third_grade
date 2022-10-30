@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vue-router.js"></script>
+</head>
+<body>
+  <div id="app">
+    <router-link to="/user/1">查看用户1</router-link>
+    <router-link to="/user/2">查看用户2</router-link>
+    <router-view></router-view>
+  </div>
+  <script>
+    var user = {
+      template: '<h1>用户组件</h1>',
+      watch: {
+        $route (to, from) {
+          console.log(to) 	  // 在控制台输出to对象
+          console.log(from) 	// 在控制台输出from对象
+        }
+      }
+    }
+    var routerObj = new VueRouter({
+      routes: [ 
+        { path: "/user/:id", component: user }
+      ]
+    })
+    var vm = new Vue({
+      el: '#app',
+      router: routerObj
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vue-router.js"></script>
+</head>
+<body>
+  <div id="app">
+    <router-link :to="{name:'user',params:{id:123}}">登录</router-link>
+    <router-view></router-view>
+  </div>
+  <script>
+    // 创建user组件
+    var user = {
+      template: '<h3>我是user组件</h3>',
+      created () {
+        console.log(this.$route)
+      }
+    }
+    // 创建路由对象
+    var router = new VueRouter({
+      routes: [{
+        path: '/user/:id', 
+        name: 'user',
+        component: user
+      }]
+    })
+    var vm = new Vue({ el: '#app', router })
+  </script>
+</body>
+</html>

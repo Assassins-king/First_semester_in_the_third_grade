@@ -1,0 +1,38 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --inline --hot --port 8088"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "vue": "2.6.x",
+    "vue-router": "3.1.x"
+  },
+  "devDependencies": {
+    "css-loader": "3.2.x",
+    "file-loader": "4.2.x",
+    "html-webpack-plugin": "3.2.x",
+    "less": "^3.13.1",
+    "less-loader": "^5.0.0",
+    "node-sass": "^7.0.3",
+    "sass-loader": "7.2.x",
+    "style-loader": "1.0.x",
+    "stylus": "^0.54.8",
+    "stylus-loader": "^3.0.2",
+    "url-loader": "2.1.x",
+    "vue-loader": "15.7.x",
+    "vue-template-compiler": "2.6.x",
+    "webpack": "4.39.x",
+    "webpack-cli": "3.3.x",
+    "webpack-dev-server": "3.8.x"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "description": ""
+}

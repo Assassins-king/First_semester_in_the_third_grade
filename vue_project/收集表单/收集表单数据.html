@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <form action="" @submit.prevent="demo">
+            <label for="demo1" >账号：</label>
+            <input type="text" id="demo1" v-model.trim="userinfo.account"></input></br></br>
+            <label for="demo1">密码：</label>
+            <input type="password" id="demo1" v-model="userinfo.password"></input></br></br>
+            <label for="demo1">年龄：</label>
+            <input type="number" id="demo1" v-model.number="userinfo.age"></input></br></br>
+            性别：
+            男<input type="radio" name="sex"  value="male" v-model="userinfo.sex"></input>
+            女<input type="radio" name="sex" value="female" v-model="userinfo.sex"></input></br></br>
+            爱好:
+            学习<input type="checkbox" v-model="userinfo.hobby" value="学习" >
+            打游戏<input type="checkbox" v-model="userinfo.hobby" value="打游戏">
+            吃饭<input type="checkbox" v-model="userinfo.hobby" value="吃饭"></br></br>
+            所属校区
+            <select v-model="userinfo.city">
+                <option value="" > 请选择校区</option>
+                <option value="shanghai"  >上海校区</option>
+                <option value="beijing" >北京校区</option>
+            </select>
+        </br></br>
+            其他信息：
+            <textarea v-model.lazy="userinfo.other"></textarea></br></br>
+           <input type="checkbox" v-model="userinfo.agree"></input> 阅读并接受<a href="https://www.henu.site">《用户协议》</a></br></br>
+           <button >提交</button>
+        </form>
+    </div>
+
+
+    <script>
+        const vm=new Vue({
+            el:'#root',
+            data:{
+                userinfo:{
+                    account:'',
+                    password:'',
+                    sex:'female',
+                    hobby:[],
+                    city:'',
+                    other:'',
+                     agree:'',
+                     age:'',
+                }
+               
+            },
+            methods: {
+                demo(){
+                    //console.log(JSON.stringify(this._data))
+                    console.log(JSON.stringify(this.userinfo))
+                }
+            },
+        })
+
+
+
+    </script>
+</body>
+</html>

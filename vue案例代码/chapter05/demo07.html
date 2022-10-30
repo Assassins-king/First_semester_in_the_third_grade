@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vue-router.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="goStart">跳转</button>
+    <router-view></router-view>
+  </div>
+  
+  <script>
+    // 定义user组件
+    var user = {
+      template: '<p>用户名：{{ this.$route.query.name }}</p>'
+    }
+    var router = new VueRouter({
+      routes: [
+        { path: '/user', component: user }
+      ]
+    })
+    var vm = new Vue({
+      el: '#app',
+      methods: {
+        goStart () {
+          this.$router.push({ path: '/user', query: { name: 'admin' } })
+        }
+      },
+      router
+    })
+  </script>
+</body>
+</html>
