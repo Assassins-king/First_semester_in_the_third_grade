@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "codemirror": "^6.0.1",
+    "diff-match-patch": "^1.0.5"
+  },
+  "devDependencies": {
+    "@volar-plugins/vetur": "latest"
+  }
+}
