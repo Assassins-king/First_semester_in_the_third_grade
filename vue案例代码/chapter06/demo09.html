@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vuex.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>列表查询</h2>
+    <input type="text" v-model="id">
+    <button @click="search">搜索</button>
+    <p>搜索结果：{{ this.$store.getters.search }}</p>
+    <ul>
+      <li v-for="item in this.$store.state.todos">{{ item }}</li>
+    </ul>
+  </div>
+  <script>
+    const store = new Vuex.Store({
+      state: {
+        todos: [
+          { id: 1, text: '列表1' },
+          { id: 2, text: '列表2' },
+          // 此处可以添加更多数据...
+        ],
+        id: 0
+      },
+      mutations: {
+        search (state, id) {
+          state.id = id
+        }
+      },
+      getters: {
+        search: state => {
+          return state.todos.filter(todo => todo.id == state.id)
+        }
+      }
+    })
+    var vm = new Vue({
+      el: '#app',
+      data: { id: '' },
+      store,
+      methods: {
+        search () {
+          this.$store.commit('search', this.id)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

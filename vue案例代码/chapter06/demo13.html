@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vuex.js"></script>
+</head>
+<body>
+  <script>
+    const store = new Vuex.Store({ })
+    store.registerModule('myModule', {
+      state: {
+        name: '我是store.registerModule()定义的模块'
+      }
+    })
+    document.write(store.state.myModule.name)
+  </script>    
+</body>
+</html>

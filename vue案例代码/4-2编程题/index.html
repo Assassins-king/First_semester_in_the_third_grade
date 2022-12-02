@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>点击展开显示全部，点击收起部分隐藏</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script> 
+    <style>
+      .status{
+        color:red
+      }
+    </style>
+</head>
+<body>
+<div id="app">
+  <div>
+    <div v-for='item in showList'>{{item}}</div>
+    <div @click="showAll = !showAll" class="status">{{flag}}</div>
+  </div>
+</div>
+<!-- 一开始只显示4个数据，点击展开显示全部 -->
+<script type = "text/javascript">
+  var vm = new Vue({
+    el:'#app',
+    data() {
+      return {
+        fruitList:[
+        '草莓','苹果','香蕉','榴莲','香梨'  // 进行显示的数据
+        ],
+        showAll:false,   // 标记数据是否需要完全显示的属性
+      } 　
+    },
+    computed:{
+      showList:function(){
+        if(this.showAll == false){
+          var showList = [];
+          if(this.fruitList.length > 4){　　// 一开始显示前4个数据
+            for(var i=0;i<4;i++){
+              showList.push(this.fruitList[i])
+            }
+          }else{
+            showList = this.fruitList
+          }
+          return showList;
+        }
+        else{
+          return this.fruitList;
+        }
+      },
+      flag:function(){
+        if(this.showAll == false){
+          return '单击展开'
+        }
+        else{
+          return '单击收起'
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>

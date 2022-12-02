@@ -1,0 +1,12 @@
+（1）	打开git-bash命令行工具
+（2）	安装Node环境
+（3）	打开解压好的vue-devtools-5.1.1文件，执行命令如下。
+	1.cnpm install
+	2.cnpm run build
+（4）   打开Chrome浏览器添加vue-devtools调试工具。
+（5）	安装脚手架工具
+	cnpm install vue-cli@2.9.x -g
+（6）	安装webpack打包工具
+	cnpm install webpack@4.27.x -g
+（7）	构建项目
+	vue init webpack app

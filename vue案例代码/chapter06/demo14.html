@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vuex.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>{{ this.$store.state.name }}</p>
+  </div>
+  <script>
+    const store = new Vuex.Store({
+      state: { name: 'name初始值' }
+    })
+    store.replaceState({ name: '我是替换后的state数据' })
+    var vm = new Vue({
+      el: '#app',
+      store
+    })
+  </script>  
+</body>
+</html>

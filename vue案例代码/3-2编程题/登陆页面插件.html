@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <my-component><my-component />
+  </div>
+  <script>
+    // 定义一个MyPlugin（自定义插件）对象
+    let MyPlugin = {}
+    // 编写插件对象的install方法
+    // install()方法有两个参数，第1个参数Vue是Vue的构造器，options是一个可选的配置对象。
+    MyPlugin.install = function (Vue, options) {
+      // 在插件中为Vue创建组件myComponent
+      Vue.component('my-component', {
+        template: '<div>{{msg}}</div>',
+        data() {
+          return {
+            msg: '我是登录页面'
+          }
+        }
+      })
+    }
+    // 调用Vue.use()方法安装插件，在第1个参数中传入插件对象MyPlugin，第2个参数传入可选配置。
+    Vue.use(MyPlugin, {
+      someOption: true
+    })
+    var vm = new Vue({
+      el: '#app'
+    })
+  </script>
+
+</body>
+
+</html>

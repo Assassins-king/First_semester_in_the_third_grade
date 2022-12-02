@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script src="vuex.js"></script>
+</head>
+<style>
+    .wrapper {
+        margin: 0 auto;
+        width: 400px;
+        border: 1px solid black;
+        padding: 10px;
+    }
+    
+    ul {
+        list-style: none;
+        padding: 0;
+        width: 400px;
+        margin-top: 20px;
+    }
+    
+    .message {
+        width: 400px;
+        border-bottom: 1px solid blue;
+        padding-bottom: 10px;
+    }
+    
+    .message .info {
+        display: inline-block;
+        position: relative;
+        border: 1px solid gray;
+    }
+    
+    .message .btn {
+        float: right;
+    }
+    
+    .message .btn span {
+        border: 1px solid pink;
+        background-color: pink;
+        border-radius: 5px;
+        margin-right: 8px;
+    }
+    
+    ul>li {
+        margin-top: 10px;
+    }
+    
+    ul>li .btn {
+        float: right;
+    }
+    
+    ul>li .btn span {
+        border: 1px solid pink;
+        background-color: pink;
+        border-radius: 5px;
+        margin-right: 8px;
+    }
+    
+    .info {
+        width: 50%;
+        display: inline-block;
+        position: relative;
+        border: 1px solid pink;
+    }
+    
+    .value {
+        border: none;
+    }
+    
+    .newValue {
+        border：none;
+        position: absolute;
+        left: 0;
+        width: 100%;
+    }
+</style>
+
+<body>
+    <div id="app">
+
+        <div class="wrapper">
+            <!-- 搜索信息 -->
+            <div class="message">
+                <div class="info">
+                    <input class="value" type="text" v-model="value" placeholder="请输入内容">
+                </div>
+
+                <button @click="add">添加</button>
+                <button @click="find">查找</button>
+
+            </div>
+            <!-- 表格信息 -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+
+                        <th>姓名</th>
+
+                        <th>性别</th>
+
+                        <th>年级</th>
+                    </tr>
+                </thead>
+                <tr v-for="(item,key) in list" :id="key" v-if="item.isFind">
+                    <td>
+                        <div class="info">
+                            {{item.id+1}}
+                            <input class="newValue" type="text" v-model="newValue" v-if="item.isShow" @blur="blur(key)">
+                        </div>
+                    </td>
+                    <td>
+                        {{item.name}}
+                        <input class="newValue" type="text" v-model="item.name" v-if="item.isShow" @blur="blur(item.name)">
+                    </td>
+                    <td>
+                        {{item.sex}}
+
+                    </td>
+                    <td>
+                        {{item.grade}}
+
+                    </td>
+                    <td>
+                        <button @click="del(key)">删除</button>
+                        <button @click="edit(key)">编辑</button>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+
+
+        <script>
+            var store = new Vuex.Store({
+                    state: {
+                        list: [{
+                            id: 0,
+                            grade: '1',
+                            name: 'zhangsan',
+                            sex: 'man',
+                            age: 6,
+                            isShow: false,
+                            isFind: true
+                        }, {
+                            id: 1,
+                            grade: '2',
+
+                            sex: 'man',
+                            name: 'zhangsan',
+                            isShow: false,
+                            isFind: true
+                        }, {
+                            id: 2,
+                            grade: '3',
+                            sex: 'man',
+                            name: 'zhangsan',
+                            isShow: false,
+                            isFind: true
+                        }, {
+                            id: 3,
+                            grade: '4',
+                            sex: 'man',
+                            name: 'zhangsan',
+                            isShow: false,
+                            isFind: true
+                        }, {
+                            id: 4,
+                            grade: '5',
+                            sex: 'man',
+                            name: 'zhangsan',
+                            isShow: false,
+                            isFind: true
+                        }, {
+                            id: 5,
+                            grade: '6',
+                            sex: 'man',
+                            name: 'zhangsan',
+                            isShow: false,
+                            isFind: true
+                        }, {
+                            id: 6,
+                            grade: '7',
+                            sex: 'man',
+                            name: 'zhangsan',
+                            isShow: false,
+                            isFind: true
+                        }, {
+                            id: 7,
+                            grade: '8',
+                            sex: 'man',
+                            name: 'zhangsan',
+                            isShow: false,
+                            isFind: true
+                        }, {
+                            id: 8,
+                            grade: '9',
+                            sex: 'man',
+                            name: 'zhangsan',
+                            isShow: false,
+                            isFind: true
+                        }, {
+                            id: 9,
+                            grade: '5',
+                            sex: 'man',
+                            name: 'zhangsan',
+                            isShow: false,
+                            isFind: true
+                        }],
+                        newList: []
+                    },
+                    mutations: {
+                        add(state, payload) {
+                            state.list.push({
+                                id: state.list.length,
+                                grade: payload,
+                                isShow: false,
+                                isFind: true
+                            })
+                        },
+                        del(state, payload) {
+                            state.list.splice(payload, 1)
+                        },
+                        edit(state, payload) {
+                            state.list.splice(payload.key, 1, payload.value)
+                        }
+                    },
+                    actions: {
+                        add(context, payload) {
+                            context.commit('add', payload)
+                        },
+                        del(context, payload) {
+                            context.commit('del', payload)
+                        },
+                        edit(context, payload) {
+                            context.console.log(payload)
+                            commit('edit', payload)
+                        },
+                    }
+                })
+                //创建Vue实例,得到 ViewModel
+            var vm = new Vue({
+                el: '#app',
+                data() {
+                    return {
+                        list: [],
+                        value: '',
+                        newValue: '',
+                        isShow: false,
+                        newid: '',
+                    }
+
+                },
+                created() {
+                    this.list = this.$store.state.list
+                },
+                methods: {
+                    add() {
+                        if (this.value) {
+                            this.$store.dispatch('add', this.value)
+                        }
+                    },
+                    del(key) {
+                        this.$store.dispatch('del', key)
+                    },
+                    edit(key) {
+                        for (let i = 0; i < this.list.length; i++) {
+                            if (i === key) {
+                                this.list[key].isShow = true
+                            } else {
+                                this.list[i].isShow = false
+                            }
+                        }
+                    },
+                    find() {
+                        if (!this.value) {
+                            alert('输入内容不能为空')
+                        } else {
+                            for (let j = 0; j < this.list.length; j++) {
+                                if (this.value !== this.list[j].name) {
+                                    this.list[j].isFind = false
+                                }
+                            }
+                        }
+                    },
+                    blur(key) {
+                        this.$store.dispatch({
+                            type: 'edit',
+                            value: {
+                                id: key,
+                                info: this.newValue,
+                                isShow: false,
+                                isFind: true
+                            },
+                            key: key
+                        })
+                    }
+                },
+                store
+            });
+        </script>
+</body>
+
+</html>

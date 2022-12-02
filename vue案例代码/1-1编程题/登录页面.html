@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>登录页面</title>
+  <!-- 引入vue.js -->
+  <script src="vue.js"></script>
+
+</head>
+
+<body>
+  <!-- 定义唯一根标签 -->
+  <div id="app">
+    <!-- 绑定login -->
+    <p>{{login}}</p>
+  </div>
+  	<script>
+      // 实例化
+    	var vm = new Vue({
+        el: '#app',
+        // 定义初始数据
+    	  data: {
+    	    login: '登录页面'
+    	  }
+    	})
+    	</script>
+   
+</body>
+
+</html>

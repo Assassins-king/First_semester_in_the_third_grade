@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vuex.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="increment">+</button>
+    <p>{{ this.$store.state.count }}</p>
+  </div>
+  <script>
+    const store = new Vuex.Store({
+      state: {
+        count: 0
+      },
+      // 修改count的值
+      mutations: {
+        increase (state) {
+          state.count++
+        }
+      }
+    })
+    var vm = new Vue({
+      el: '#app',
+      store,
+      methods: {
+        increment () {
+          this.$store.commit('increase')
+        }
+      }
+    })
+  </script>    
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="vue.js"></script>
+    <title>简单计算器</title>
+</head>
+<body>
+    <div id="root">
+    <computer></computer>
+    </div>
+
+    <script>
+
+        const computer=Vue.extend({
+            template:`
+<div>
+               <h1>简单计算器</h1>
+      第一个数：<input type="text" v-model='num1' placeholder="请输入第一个数" /><br />
+      第二个数：<input type="text" v-model='num2'placeholder="请输入第二个数" /><br />
+      <input type="button" @click='add' value="+">
+      <input type="button" @click='minus' value="-">
+      <input type="button" @click='divide' value="x">
+      <input type="button" @click='multi' value="/">
+      <div>计算机的结果：{{res}}</div>
+</div>
+
+            `,
+            methods: {
+                add() {
+                   this.res = Number(this.num1) + Number(this.num2);
+                    console.log(this.res);
+                    return this.res;
+                },
+                minus() {
+                    this.res = Number(this.num1) - Number(this.num2);
+                    console.log(this.res);
+                    return this.res;
+                },
+                divide() {
+                    this.res = Number(this.num1) * Number(this.num2);
+                    console.log(this.res);
+                    return this.res;
+                },
+                multi() {
+                    this.res = (Number(this.num1) / Number(this.num2)).toFixed(2);
+                    console.log(this.res);
+                    return this.res;
+                }
+            },
+
+            data(){
+                return{
+                        num1:'',
+                        num2:'',
+                        res:''
+                }
+            }
+        })
+
+
+     var vm =new Vue({
+         el:'#root',
+         components:{
+             computer:computer,
+         },
+     })
+      
+    </script>
+
+</body>
+</html>

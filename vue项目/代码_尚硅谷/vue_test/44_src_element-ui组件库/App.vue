@@ -10,6 +10,9 @@
 			<el-button type="warning">警告按钮</el-button>
 			<el-button type="danger">危险按钮</el-button>
 		</atguigu-row>
+    <div slot="empty" style="text-align: left;">
+      <el-empty description="哎呀，你是不是忘记查询啦！" />
+    </div>
 		<atguigu-date-picker
       type="date"
       placeholder="选择日期">

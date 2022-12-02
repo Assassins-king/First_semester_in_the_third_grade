@@ -1,0 +1,7 @@
+
+vue init webpack shopcart
+
+cd shopcart
+npm install vuex@3.1.1 --save
+
+npm run dev

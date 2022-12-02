@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vuex.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div class="count">
+      <button @click="calc">计数</button>
+      <span>{{ this.$store.state.count }}</span>
+    </div>
+  </div>
+  <script>
+    const store = new Vuex.Store({
+      state: { count: 0 },
+      mutations: {
+        increment (state) {
+          state.count++
+        }
+      },
+      actions: {
+        add (context) {
+          context.commit('increment')
+        }
+        // add ({ commit }) {
+        //   commit('increment')
+        // }
+      }
+    })
+    var vm = new Vue({
+      el: '#app',
+      store,
+      methods: {
+        calc () {
+          this.$store.dispatch('add')
+        }
+      }
+    })
+  </script>
+</body>
+</html>

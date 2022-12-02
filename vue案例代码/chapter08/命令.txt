@@ -1,0 +1,50 @@
+
+8.2.1
+
+mkdir vue-ssr
+cd vue-ssr
+npm init -y
+
+npm install vue@2.6.x vue-server-renderer@2.6.x --save
+
+8.2.2
+
+node test.js
+
+8.2.3
+
+npm install express@4.17.x --save
+
+node server.js
+
+8.2.4
+
+npm install koa@2.8.x --save
+
+node koa.js
+
+8.3.2
+
+npm install @vue/cli -g
+
+vue create ssr-project
+
+cd ssr-project
+npm install vue-router@3.1.x koa@2.8.x vue-server-renderer@2.6.x --save
+
+"build:server": "vue-cli-service build --mode server"
+
+npm run build:server
+
+node server.js
+
+http://localhost:8080
+
+8.4.1
+
+npm install create-nuxt-app@2.9.x -g
+
+create-nuxt-app my-nuxt-demo
+
+cd my-nuxt-demo
+npm run dev

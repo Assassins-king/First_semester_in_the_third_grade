@@ -1,0 +1,24 @@
+<div>
+  <div class="main-title">
+    <h2>{if $id}编辑{else}新增{/if}角色</h2>
+  </div>
+  <div class="main-section">
+    <form method="post" action="{:url('save')}" class="j-form">
+      <ul class="form-group form-inline">
+        <li>
+          <input type="text" class="form-control" name="name" value="{$data.name}" required> <label>名称</label>
+        </li>
+        <li>
+          <input type="hidden" name="id" value="{$id}">
+          <input type="submit" value="提交表单" class="btn btn-primary">
+          <a href="{:url('index')}" class="btn btn-default">返回列表</a>
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>
+<script>
+  main.ajaxForm('.j-form', function () {
+    main.content("{:url('index')}");
+  });
+</script>

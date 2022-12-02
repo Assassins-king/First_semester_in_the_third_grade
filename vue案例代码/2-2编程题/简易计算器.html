@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>比较两个数字大小</title>
+  <!-- 引入vue.js -->
+  <script src="vue.js"></script>
+  <style>
+    .calc{
+      margin: 0 auto;
+      width: 500px;
+    }
+    ul{
+      padding: 0;
+    }
+    ul li {
+      list-style: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 定义页面结构 -->
+    <div class="calc">
+      <ul>
+        <li>
+          请输入第一个数：<input type="text" v-model="num1">
+        </li>
+        <li>
+          <select name="" id="fuhao">
+            <option value="1" onclick="">+</option>
+            <option value="2" onclick="">-</option>
+            <option value="3" onclick="">*</option>
+            <option value="4" onclick="">/</option>
+          </select>
+        </li>
+        <li>
+          请输入第二个数：<input type="text" v-model="num2">
+        </li>
+        <li>
+          <input type="button" value="计算" @click='calc()'>
+        </li>
+      </ul>
+      <div class="result">
+        得出结果：{{result}}
+      </div>
+    </div>    
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      // 定义初始数据
+      data: {
+        num1: '',
+        num2: '',
+        result: ''
+      },
+      // 定义事件处理函数compare
+      methods: {
+        calc() {
+          if (!this.num1 || !this.num2) {
+            this.result = '输入的数不能为空'
+          } else {
+            var fuhao = document.getElementById('fuhao').value;
+            if (fuhao == "1") {
+              this.result = parseInt(this.num1) + parseInt(this.num2)
+            }
+            if (fuhao == "2") {
+              this.result = parseInt(this.num1) - parseInt(this.num2)
+            }
+            if (fuhao == "3") {
+              this.result = parseInt(this.num1) * parseInt(this.num2)
+            }
+            if (fuhao == "4") {
+              this.result = parseInt(this.num1) / parseInt(this.num2)
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

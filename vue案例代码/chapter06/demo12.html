@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vuex.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    const store = new Vuex.Store({
+      mutations: {
+        do (state) {}
+      },
+      // devtools选项
+      devtools: true
+    })
+    store.commit('do', 'plugin')
+    var vm = new Vue({ el: "#app", store })
+  </script>  
+</body>
+</html>

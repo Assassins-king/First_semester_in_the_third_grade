@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>导航栏</title>
+  <!-- 引入vue.js -->
+  <script src="vue.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .c-nav {
+      width: 900px;
+      height: 42px;
+      margin: 0 auto;
+      border-radius: 5px;
+      position: relative;
+    }
+
+    .c-nav li {
+      float: left;
+      width: 83px;
+      text-align: center;
+      line-height: 42px;
+    }
+
+    .c-nav li a {
+      color: #333;
+      display: inline-block;
+      height: 42px;
+    }
+
+    header {
+      background: #ccc;
+    }
+
+    .c-nav li.current a {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <my-component>
+      <!-- 定义导航栏结构 -->
+      <template v-slot:header>
+        <div id="c_nav" class="c-nav">
+          <span class="cloud"></span>
+          <ul ref='nav'>
+            <li v-bind:class="{currentName}" v-for="item,key in list" @mouseenter="current(key)" @mouseleave="cancel()"
+              :id=key>
+              <a href="#">{{item}}</a>
+            </li>
+          </ul>
+        </div>
+      </template>
+    </my-component>
+  </div>
+  <script>
+    // 注册组件
+    Vue.component('my-component', {
+      render(createElement) {
+        return createElement('div', [
+          createElement('header', this.$slots.header),
+        ])
+      }
+    })
+    var vm = new Vue({
+      el: '#app',
+      // 定义初始数据
+      data: {
+        list: ['首页新闻', '公司简介', '招聘信息', '活动策划', '师资力量'],
+        currentName: '',
+      },
+      methods: {
+        // 定义事件处理函数
+        current(key) {
+          vm.$refs.nav.getElementsByTagName('li')[key].className = 'current';
+        },
+        cancel() {
+          for (var i = 0; i < vm.$refs.nav.getElementsByTagName('li').length; i++) {
+            vm.$refs.nav.getElementsByTagName('li')[i].className = ''
+          }
+        }
+      }
+
+    })
+  </script>
+
+</body>
+
+</html>

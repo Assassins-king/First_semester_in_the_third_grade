@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+  
+<div id="app1">
+    <h1>登录界面</h1>
+    <div> 
+        <label>账号：</label>
+        <input type="text" v-model="name" class="input" placeholder="填入账号"/>
+    </div>
+    <div>
+    </br>
+    </div>
+    <div>
+        <label>密码：</label>
+        <input v-model="password" type="password" class="input" placeholder="密码"/>
+    </div>
+    <div>
+        <button v-on:click="dosubmit" type="button" id="btn">登 录</button>
+    </div>
+</div>
+
+<script>
+    var vm =new Vue({
+        el:"#app1",
+        data:{
+        name: "",
+          password: ""
+        },
+        methods: {
+        dosubmit() {
+            if(this.name=='崔文帅'&&this.password=='2025060163'){
+                alert("账号密码正确！登陆成功！")
+            }
+            else{
+                alert("登录失败，请检查账号密码！")
+                data.name=''
+                data.password=''
+            }
+          }
+        
+        }
+      }
+    )
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,46 @@
+<div>
+  <div class="main-title">
+    <h2>{if $id}编辑{else}新增{/if}菜单</h2>
+  </div>
+  <div class="main-section">
+    <form method="post" action="{:url('save')}" class="j-form">
+      <ul class="form-group form-inline">
+        <li>
+          <input type="text" class="form-control" maxlength="5" name="sort" value="{$data.sort}" style="width:50px;">
+          <label>序号</label>
+        </li>
+        <li>
+          <select name="pid" class="form-control" style="min-width:196px;">
+            <option value="0">---</option>
+            {foreach $menu as $v}
+            {if $v.level === 0 && $v.id !== $id}
+            <option value="{$v.id}" {if $v.id===$data.pid}selected{/if}>{$v.name} </option>
+            {/if}
+            {/foreach}
+          </select>
+          <label>上级菜单</label>
+        </li>
+        <li>
+          <input type="text" class="form-control" name="name" value="{$data.name}" required> <label>名称</label>
+        </li>
+        <li>
+          <input type="text" class="form-control" name="icon" value="{$data.icon}" required> <label>图标</label>
+        </li>
+        <li>
+          <input type="text" class="form-control" name="controller" value="{$data.controller}" required>
+          <label>控制器</label>
+        </li>
+        <li>
+          <input type="hidden" name="id" value="{$id}">
+          <input type="submit" value="提交表单" class="btn btn-primary">
+          <a href="{:url('index')}" class="btn btn-default">返回列表</a>
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>
+<script>
+  main.ajaxForm('.j-form', function () {
+    main.content("{:url('index')}");
+  });
+</script>

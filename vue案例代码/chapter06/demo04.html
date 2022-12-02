@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vuex.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="mut">查看mutations接收的参数</button>
+    <button @click="act">查看actions接收的参数</button>
+  </div>
+  <script>
+    var store = new Vuex.Store({
+      state: {
+        name: '张三',
+        age: 38,
+        gender: '男'
+      },
+      mutations: {
+        test (state) {
+          console.log(state)
+        }
+      },
+      actions: {
+        test (context, param) {
+          console.log(context)
+          console.log(param)
+        }
+      }
+    })
+    var vm = new Vue({
+      el: '#app',
+      store,
+      methods: {
+        mut () {
+          this.$store.commit('test')
+        },
+        act () {
+          this.$store.dispatch('test')
+          // this.$store.dispatch('test', '我是传递的参数')
+          // this.$store.dispatch({ type: 'test', name: '我是传递的参数' })
+        }
+      }
+    })
+  </script>
+</body>
+</html>

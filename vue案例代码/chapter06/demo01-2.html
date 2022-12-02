@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vuex.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>{{name}}</p>
+  </div>
+  <script>
+    // 创建实例对象store
+    var store = new Vuex.Store({
+      state: {
+        name: 'vuex.js直接引用'
+      }
+    })
+    var vm = new Vue({
+      el: '#app',
+      store,
+      computed: {
+        name () {
+          return this.$store.state.name
+        }
+      }
+    })
+  </script>
+</body>
+</html>

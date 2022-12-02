@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="__CDN__/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="__CDN__/font-awesome-4.2.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="__CDN__/toastr.js/2.1.4/toastr.min.css">
+  <link rel="stylesheet" href="__STATIC__/css/main.css">
+  <script src="__CDN__/jquery/1.12.4/jquery.min.js"></script>
+  <script src="__CDN__/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="__CDN__/toastr.js/2.1.4/toastr.min.js"></script>
+  <script src="__STATIC__/js/main.js"></script>
+  <title>后台管理系统</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-default navbar-static-top main-nav" role="navigation">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="navbar-brand">后台管理系统</div>
+    </div>
+    <div class="collapse navbar-collapse">
+      <div class="main-sidebar">
+        <ul class="nav main-menu">
+          <!--li>
+            <a href="{:url('Index/index')}" class="active">
+              <i class="fa fa-home fa-fw"></i>首页
+            </a>
+          </li>
+          <li class="main-sidebar-collapse">
+            <a href="#" class="main-sidebar-collapse-btn">
+              <i class="fa fa-cog fa-fw"></i>设置
+              <span class="fa main-sidebar-arrow"></span>
+            </a>
+            <ul class="nav">
+              <li><a href="{:url('test1')}"><i class="fa fa-cog fa-fw"></i>设置1</a></li>
+              <li><a href="{:url('test2')}"><i class="fa fa-cog fa-fw"></i>设置2</a></li>
+            </ul>
+          </li-->
+          {foreach $layout_menu as $v}
+          <li class="{if $v.sub && !$v.curr}main-sidebar-collapse{/if}">
+            <a href="{:url('admin/'.$v.controller.'/index')}"
+              class="{if $v.sub}main-sidebar-collapse-btn {else}{if $v.curr}active{/if}{/if}"
+              data-name="{$v.controller}"><i class="fa fa-{$v.icon} fa-fw"></i>{$v.name}{if $v.sub}<span
+                class="fa main-sidebar-arrow"></span>{/if}</a>
+            {if $v.sub}
+            <ul class="nav">
+              {foreach $v.sub as $vv}
+              <li>
+                <a href="{:url('admin/'.$vv.controller.'/index')}" class="{if $vv.curr}active{/if}"
+                  data-name="{$vv.controller}"><i class="fa fa-{$vv.icon} fa-fw"></i>{$vv.name}</a>
+              </li>
+              {/foreach}
+            </ul>
+            {/if}
+          </li>
+          {/foreach}
+        </ul>
+      </div>
+      <!-- 将用户名和退出按钮链接放在大屏幕的顶部右侧-->
+      <ul class="nav navbar-right ">
+        <li>
+          <!--a href="#"><i class="fa fa-user fa-fw"></i>admin</a-->
+          <a href="{:url('Index/password')}" class="j-layout-pwd"><i class="fa fa-user fa-fw"></i>{$layout_login_user.username}</a>
+        </li>
+        <li><a href="{:url('Index/logout')}"><i class="fa fa-power-off fa-fw"></i>退出</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" 
+           aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <div class="j-modal-content"></div>
+          <div class="main-loading" style="display:none">
+            <div class="dot-carousel"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary j-modal-submit">确定</button>
+          <button type="button" class="btn btn-default j-modal-cancel" 
+           data-dismiss="modal">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>  
+  <script>main.init({ token: '{$layout_token}' });</script>
+  <div class="main-container">
+    <div class="main-content">{__CONTENT__}</div>
+    <div class="main-loading" style="display:none">
+      <div class="dot-carousel"></div>
+    </div>
+  </div>
+  <script>main.layout();</script>
+</body>
+
+</html>

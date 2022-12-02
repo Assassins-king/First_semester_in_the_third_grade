@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vuex.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="param">传递参数</button>
+    <p>{{ this.$store.state.param }}</p>
+  </div>
+  <script>
+    var store = new Vuex.Store({
+      state: { param: '' },
+      mutations: {
+        receive (state, param) {
+          state.param = param
+          // console.log(param)        // 查看接收到的param值
+          // state.param = param.name
+        }
+      },
+      actions: {
+        param (context){
+          context.commit('receive', '我是传递的参数')
+          // context.commit({ type: 'receive', name: '我是传递的参数' })
+        }
+      }
+    })
+    var vm = new Vue({
+      el: '#app',
+      store,
+      methods: {
+        param () {
+          this.$store.dispatch('param')
+        }
+      }
+    })
+  </script>
+</body>
+</html>

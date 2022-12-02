@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vuex.js"></script>
+</head>
+<style>
+  .wrapper {
+    margin: 0 auto;
+    width: 400px;
+    border: 1px solid black;
+    padding: 10px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    width: 400px;
+    margin-top: 20px;
+
+  }
+
+  .message {
+    width: 400px;
+    border-bottom: 1px solid blue;
+    padding-bottom: 10px;
+
+  }
+
+  .message .info {
+    display: inline-block;
+    position: relative;
+    border: 1px solid gray;
+  }
+
+  .message .btn {
+    float: right;
+
+  }
+
+  .message .btn span {
+    border: 1px solid pink;
+    background-color: pink;
+    border-radius: 5px;
+    margin-right: 8px;
+  }
+
+  ul>li {
+    margin-top: 10px;
+  }
+
+  ul>li .btn {
+    float: right;
+  }
+
+  ul>li .btn span {
+    border: 1px solid pink;
+    background-color: pink;
+    border-radius: 5px;
+    margin-right: 8px;
+  }
+
+  .info {
+    width: 50%;
+    display: inline-block;
+    position: relative;
+    border: 1px solid pink;
+  }
+
+  .value {
+    border: none;
+  }
+
+  .newValue {
+    border：none;
+    position: absolute;
+    left: 0;
+    width: 100%;  
+  }
+</style>
+
+<body>
+  <div id="app">
+
+    <div class="wrapper">
+      <!-- 搜索信息 -->
+      <div class="message">
+        <div class="info">
+          <input class="value" type="text" v-model="value" placeholder="请输入内容">
+        </div>
+        <div class="btn">
+          <span @click="add">添加</span>
+          <span @click="find">查找</span>
+        </div>
+      </div>
+      <!-- 表格信息 -->
+      <ul>
+        <li>
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>  </th>
+            <th >姓名</th>
+            <th>  </th>
+            <th>性别/℃</th>
+            <th>  </th>
+            <th>年级</th>
+          </tr>
+          </thead>
+
+        </li>
+        <li v-for="item,key in list" :id="key" @click="" v-if="item.isFind">
+          <div class="info">
+            {{item.id}}
+            {{item.age}}
+            <input class="newValue" type="text" v-model="newValue" v-if="item.isShow" @blur="blur(key)">
+          </div>
+          <div class="btn">
+            <span @click="del(key)">刪除</span>
+            <span @click="edit(key)">编辑</span>
+
+          </div>
+
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+
+  <script>
+    var store = new Vuex.Store({
+      state: {
+        list: [{
+          id: 0,
+          info: '1',
+          age:6,
+          isShow: false,
+          isFind: true
+        }, {
+          id: 1,
+          info: '2',
+          isShow: false,
+          isFind: true
+        }, {
+          id: 2,
+          info: '3',
+          isShow: false,
+          isFind: true
+        }, {
+          id: 3,
+          info: '4',
+          isShow: false,
+          isFind: true
+        }, {
+          id: 4,
+          info: '5',
+          isShow: false,
+          isFind: true
+        }, {
+          id: 5,
+          info: '6',
+          isShow: false,
+          isFind: true
+        }, {
+          id: 6,
+          info: '7',
+          isShow: false,
+          isFind: true
+        }, {
+          id: 7,
+          info: '8',
+          isShow: false,
+          isFind: true
+        }, {
+          id: 8,
+          info: '列表8',
+          isShow: false,
+          isFind: true
+        }, {
+          id: 9,
+          info: '列表9',
+          isShow: false,
+          isFind: true
+        }],
+        newList: []
+      },
+      mutations: {
+        add(state, payload) {
+          state.list.push({
+            id: state.list.length,
+            info: payload,
+            isShow: false,
+            isFind: true
+          })
+        },
+        del(state, payload) {
+          state.list.splice(payload, 1)
+        },
+        edit(state, payload) {
+          state.list.splice(payload.key, 1, payload.value)
+        }
+      },
+      actions: {
+        add({ commit }, payload) {
+          commit('add', payload)
+        },
+        del({ commit }, payload) {
+          commit('del', payload)
+        },
+        edit({ commit }, payload) {
+          console.log(payload)
+          commit('edit', payload)
+        },
+      }
+    })
+    //创建Vue实例,得到 ViewModel
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        list: [],
+        value: '',
+        newValue: '',
+        isShow: false,
+      },
+      created() {
+        this.list = this.$store.state.list
+      },
+      methods: {
+        add() {
+          if (this.value) {
+            this.$store.dispatch('add', this.value)
+          }
+        },
+        del(key) {
+          this.$store.dispatch('del', key)
+        },
+        edit(key) {
+          for (let i = 0; i < this.list.length; i++) {
+            if (i === key) {
+              this.list[key].isShow = true
+            } else {
+              this.list[i].isShow = false
+            }
+          }
+        },
+        find() {
+          if (!this.value) {
+            alert('输入内容不能为空')
+          } else {
+            for (let j = 0; j < this.list.length; j++) {
+              if (this.value !== this.list[j].info) {
+                this.list[j].isFind = false
+              }
+            }
+          }
+        },
+        blur(key) {
+          this.$store.dispatch({
+            type: 'edit',
+            value: {
+              id: key,
+              info: this.newValue,
+              isShow: false,
+              isFind: true
+            },
+            key: key
+          })
+        }
+      },
+      store
+    });
+  </script>
+</body>
+
+</html>

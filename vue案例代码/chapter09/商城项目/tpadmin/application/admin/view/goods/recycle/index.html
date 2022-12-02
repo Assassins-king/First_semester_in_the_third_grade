@@ -1,0 +1,64 @@
+<div>
+  <div class="main-title">
+    <h2>商品管理</h2>
+  </div>
+  <div class="main-section">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th width="80">分类</th>
+          <th width="100">图片</th>
+          <th>名称</th>
+          <th width="80">库存量</th>
+          <th width="70">状态</th>
+          <th width="155">删除时间</th>
+          <th width="160">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {foreach $goods as $v}
+        <tr>
+          <td>{$v.goods_category.name ?: '---'}</td>
+          <td>
+            <img src="{if $v.image}__UPLOAD__/{$v.image}{else /}__STATIC__/goods/img/noimg.png{/if}" width="50" height="50">
+          </td>
+          <td>{$v.name}</td>
+          <td>{$v.num}</td>
+          <td>
+            {if $v.status}<span class="text-success">上架</span>{else /}<span class="text-warning">下架</span>{/if}
+          </td>
+          <td>{$v.delete_time}</td>
+          <td>
+            <a href="{:url('restore', ['id' => $v.id])}" class="j-recycle text-success" style="margin-right:8px;">恢复</a>
+            <a href="{:url('delete', ['id' => $v.id])}" class="j-del text-danger">彻底删除</a>
+          </td>
+        </tr>        
+        {/foreach}
+        {if $goods->isEmpty()}
+        <tr>
+          <td colspan="7" class="text-center">列表为空</td>
+        </tr>
+        {/if}
+      </tbody>
+    </table>
+    <div class="text-center">{$goods|raw}</div>
+  </div>
+</div>
+<script>
+  $('.j-del').click(function() {
+    if (confirm('您确定将此项从回收站中删除？')) {
+      main.ajaxPost($(this).attr('href'), function() {
+        main.contentRefresh();
+      });
+    }
+    return false;
+  });
+  $('.j-recycle').click(function() {
+    if (confirm('您确定恢复此项？')) {
+      main.ajaxPost($(this).attr('href'), function() {
+        main.contentRefresh();
+      });
+    }
+    return false;
+  });
+</script>

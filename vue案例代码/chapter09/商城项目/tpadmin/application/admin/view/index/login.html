@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="__CDN__/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="__CDN__/toastr.js/2.1.4/toastr.min.css">
+  <link rel="stylesheet" href="__STATIC__/css/main.css?{if $Think.env.app_debug}_={:time()}{else /}v={$Think.config.tpadmin.version}{/if}">
+  <script src="__CDN__/jquery/1.12.4/jquery.min.js"></script>
+  <script src="__CDN__/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="__CDN__/toastr.js/2.1.4/toastr.min.js"></script>
+  <script src="__STATIC__/js/main.js?{if $Think.env.app_debug}_={:time()}{else /}v={$Think.config.tpadmin.version}{/if}"></script>
+  <title>登录</title>
+</head>
+
+<body class="login">
+  <div class="container">
+    <form method="post" class="j-login">
+      <h1>后台管理系统</h1>
+      <div class="form-group">
+        <input type="text" name="username" class="form-control" placeholder="用户名" required>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" class="form-control" placeholder="密码" required>
+      </div>
+      <div class="form-group">
+        <input type="text" name="captcha" class="form-control" placeholder="验证码" required>
+      </div>
+      <div class="form-group">
+        <div class="login-captcha"><img src="{:captcha_src()}" alt="captcha"></div>
+      </div>
+      <div class="form-group">
+        <input type="submit" class="btn btn-lg btn-success" value="登录">
+      </div>
+    </form>
+    <div class="main-loading" style="display:none">
+      <div class="dot-carousel"></div>
+    </div>  
+  </div>
+  <script>
+    main.init({token: '{$token}'});
+
+    $('.login-captcha img').click(function () {
+      $(this).attr('src', '{:captcha_src()}' + '?_=' + Math.random());
+    });
+
+    main.ajaxForm('.j-login', function() {
+      location.href = "{:url('Index/index')}";
+    }, function() {
+      $('.login-captcha img').click();
+    });
+
+    // $.get('/admin/index/test1', function (data) {
+    //   console.log(data);
+    // });
+
+    // $.get('/admin/index/test2', function(data) {
+    //   console.log(data);
+    // });
+
+    // 先进行初始化
+    // main.init();
+
+    // 测试1：第1个参数传入请求地址，第2个参数传入成功时的回调函数
+    // main.ajax('test1', function(data) {
+    //   toastr.success(data.msg);
+    //   console.log(data);
+    // });
+
+    // 测试2：第1个参数传入请求地址，第3个参数传入失败时的回调函数
+    // main.ajax('test2', null, function(data) {
+    //   console.log(data);
+    // });
+
+    // 测试3：第1个参数传入对象
+    // main.ajax({url: 'test1', success: function(data) {
+    //   console.log(data);
+    // }});
+
+    // 先进行初始化
+    // main.init();
+
+    // 测试POST请求成功时的效果
+    // main.ajaxPost('test1', function(data) {
+    //   console.log(data);
+    // });
+
+    // 测试POST请求失败时的效果
+    // main.ajaxPost('test2', function(data) {
+    //   console.log(data);
+    // });
+
+    // <img src="http://xxx/admin/data/delete/id/1">
+
+    // <form id="f" method="post" action="http://xxx/admin/data/delete" target="i">
+    //   <input type="hidden" name="id" value="1">
+    // </form>
+    // <iframe style="display:none" name="i"></iframe>
+    // <script>
+    //   document.getElementById('f').submit();
+    // <\/script>
+  </script>
+</body>
+
+</html>

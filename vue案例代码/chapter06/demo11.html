@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vuex.js"></script>
+</head>
+<body>
+  <script>
+    const myPlugin = store => {
+      // 当store初始化后调用
+      store.subscribe((mutation, state) => {
+        // 每次mutation提交后调用，mutation格式为 {type, payload}
+        console.log(mutation.type, mutation.payload)
+      })
+    }
+    const store = new Vuex.Store({
+      mutations: {
+        do (state) {
+          console.log(state)
+        }
+      },
+      plugins: [myPlugin]
+    })
+    store.commit('do', 'plugin')
+  </script>    
+</body>
+</html>

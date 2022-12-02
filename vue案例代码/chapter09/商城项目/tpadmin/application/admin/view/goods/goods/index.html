@@ -1,0 +1,97 @@
+<div>
+  <div class="main-title">
+    <h2>商品管理</h2>
+  </div>
+  <div class="main-section form-inline">
+    <a href="{:url('edit', ['category_id' => $category_id])}" class="btn btn-success">+ 新增</a>
+    <select class="j-select form-control" style="min-width:120px;margin-left:2px">
+      <option value="{:url('', ['category_id' => 0])}">所有分类</option>
+      {foreach $category as $v}
+        <optgroup label="{$v.name}">
+          {foreach $v.sub as $vv}
+            <option value="{:url('', ['category_id' => $vv.id])}" {if $category_id==$vv.id}selected{/if}>{$vv.name}</option>
+          {/foreach}
+        </optgroup>
+      {/foreach}
+    </select>
+    <form class="input-group j-search" style="width:200px;margin:0 2px;">
+      <input type="text" class="form-control" name="search" value="{$search}" 
+       placeholder="输入商品名" required>
+      <span class="input-group-btn">
+        <input type="submit" class="btn btn-default" value="搜索">
+      </span>
+    </form>
+    {if $search !== ''}
+      <a href="{:url('', ['category_id' => $category_id])}">清除条件</a>
+    {/if}
+  </div>
+  <div class="main-section">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th width="80">分类</th>
+          <th width="60">图片</th>
+          <th>名称</th>
+          <th width="80">库存量</th>
+          <th width="70">状态</th>
+          <th width="155">创建时间</th>
+          <th width="100">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {foreach $goods as $v}
+        <tr>
+          <td>{$v.goods_category.name ?: '---'}</td>
+          <td>
+            <a href="{:url('edit', ['id' => $v.id])}"><img src="{if $v.image}__UPLOAD__/{$v.image}{else /}__STATIC__/goods/img/noimg.png{/if}" width="50" height="50"></a>
+          </td>
+          <td><a href="{:url('edit', ['id' => $v.id])}">{$v.name}</a></td>
+          <td>{$v.num}</td>
+          <td>
+          {if $v.status}
+            <a href="{:url('changestatus', ['id' => $v.id, 'status' => 0])}" class="j-status text-success">上架</a>
+          {else /}
+            <a href="{:url('changestatus',  ['id' => $v.id, 'status' => 1])}" class="j-status text-warning">下架</a>
+          {/if}
+          </td>
+          <td>{$v.create_time}</td>
+          <td>
+            <a href="{:url('edit', ['id' => $v.id])}" style="margin-right:5px;">编辑</a>
+            <a href="{:url('delete', ['id' => $v.id])}" class="j-del text-danger">删除</a>
+          </td>
+        </tr>
+        {/foreach}
+        {if $goods->isEmpty()}
+        <tr>
+          <td colspan="7" class="text-center">列表为空</td>
+        </tr>
+        {/if}
+      </tbody>
+    </table>
+    <div class="text-center">{$goods|raw}</div>
+  </div>
+</div>
+<script>
+  $('.j-select').change(function() {
+    main.content($(this).val());
+  });
+  $('.j-search').submit(function() {
+    var val = $(this).find('input[name=search]').val();
+    main.content('?search=' + encodeURIComponent(val));
+    return false;
+  });
+  $('.j-del').click(function() {
+    if (confirm('您确定将此项放入回收站？')) {
+      main.ajaxPost($(this).attr('href'), function () {
+        main.contentRefresh();
+      });
+    }
+    return false;
+  });
+  $('.j-status').click(function () {
+    main.ajaxPost($(this).attr('href'), function () {
+      main.contentRefresh();
+    });
+    return false;
+  });
+</script>

@@ -1,0 +1,7 @@
+{
+    "php.suggest.basic": false,
+    "php.executablePath": "C:/web/php7.2/php.exe",
+    "phpcs.standard": "psr2",
+    "phpcs.ignorePatterns": ["database", "thinkphp", "runtime", "public", "vendor"],
+    "files.eol": "\n"
+}

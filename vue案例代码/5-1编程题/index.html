@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>使用路由实现Tab栏切换</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #app{
+            width:100%;
+        }
+        #app ul{
+            height: 30px;
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-center;
+            align-items: center;
+            justify-content: space-around;
+            text-align: center;
+            
+        }
+        #app>ul>li{
+            border: 1px solid red;
+            flex: 1;
+        }
+        li a{
+            width: 100%;
+            text-decoration: none;
+            line-height: 30px;
+            display: inline-block;
+        }
+        .pay p{
+            text-align:center;
+            line-height: 200px;
+        }
+        /*  */
+      .router-link-active{
+        background-color: #09f;
+        color: #fff;
+      }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li>
+                <router-link to="/payment">待付款</router-link>
+            </li>
+            <li>
+                <router-link to="/deliver">待发货</router-link>
+            </li>
+            <li>
+                <router-link to="/receive">待收货</router-link>
+            </li>
+        </ul>
+        <!-- 路由匹配到的组件将渲染在这里 -->
+        <router-view></router-view>
+    </div>
+    <template id="Payment">
+        <div class="pay">
+            <p>待付款商品信息</p>
+        </div>
+    </template>
+     
+    <template id="Deliver">
+        <div class="pay">
+            <p>待发货商品信息</p>
+        </div>
+    </template>
+    <template id="Receive">
+        <div class="pay">
+            <p>待收货商品信息</p>
+        </div>
+    </template>
+<script>
+    // 1 定义路由组件
+    const ListOne = {template:'#Payment'}
+    const ListTwo = {template:'#Deliver'}
+    const ListThree = {template:'#Receive'}
+    // 2 定义路由，创建 router 实例
+    const router=new VueRouter({
+        routes:[
+            { path: '/', redirect: '/payment' },
+            { path:'/payment',component:ListOne },
+            { path:'/deliver',component:ListTwo },
+            { path:'/receive',component:ListThree }
+        ]
+    });
+    // 3 创建和挂载根实例
+    const app = new Vue({
+        router
+    }).$mount('#app')
+</script>
+</body>
+</html>

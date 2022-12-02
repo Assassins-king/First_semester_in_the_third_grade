@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>比较两个数字大小</title>
+  <!-- 引入vue.js -->
+  <script src="vue.js"></script>
+  <style>
+
+.compare{
+      margin: 0 auto;
+      width: 500px;
+    }
+    ul{
+      padding: 0;
+    }
+    ul li {
+      list-style: none;
+      margin-top: 20px;
+    }
+    
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 定义页面结构 -->
+    <div class="compare">
+      <ul>
+        <li>
+          请输入第一个数：<input type="text" v-model="num1">
+        </li>
+        <li>
+          请输入第二个数：<input type="text" v-model="num2">
+        </li>
+        <li>
+          <input type="button" value="比较" @click='compare()'>
+        </li>
+      </ul>
+      <div class="result">
+        得出结果：{{result}}
+      </div>
+    </div>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      // 定义初始数据
+      data: {
+        num1: '',
+        num2: '',
+        result: ''
+      },
+      // 定义事件处理函数compare
+      methods: {
+        compare() {
+          if (!this.num1 || !this.num2) {
+            this.result = '请输入正确的数字'
+          } else {
+            this.result = this.num1 == this.num2 ? '两个数相等' : parseInt(this.num1) > parseInt(this.num2) ? '第一个数大于第二个数' : '第一个数小于第二个数'
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

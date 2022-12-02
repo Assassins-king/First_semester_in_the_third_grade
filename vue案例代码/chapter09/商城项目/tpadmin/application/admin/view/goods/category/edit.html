@@ -1,0 +1,79 @@
+<div>
+  <div class="main-title">
+    <h2>{if $id}编辑{else}新增{/if}分类</h2>
+  </div>
+  <div class="main-section">
+    <form method="post" action="{:url('save')}" class="j-form">
+      <ul class="form-group form-inline">
+        <li>
+          <input type="text" class="form-control" maxlength="5" name="sort" value="{$data.sort}" style="width:50px;">
+          <label>序号</label>
+        </li>
+        <li>
+          <select name="pid" class="form-control" style="min-width:196px;">
+            <option value="0">---</option>
+            {foreach $category as $v}
+            {if $v.level === 0 && $v.id !== $id}
+            <option value="{$v.id}" {if $v.id===$data.pid}selected{/if}> {$v.name}</option>
+            {/if}
+            {/foreach}
+          </select>
+          <label>上级分类</label>
+        </li>
+        <li>
+          <input type="text" class="form-control" name="name" value="{$data.name}" required> <label>名称</label>
+        </li>
+        <li>
+          <input type="button" class="btn btn-success j-upload-category" value="上传图片">
+        </li>
+        <li>
+          <ul class="main-imglist j-category-image">
+            <li>
+              <div class="main-imglist-item">
+                <img class="j-upload-category" src="{if $data.image}__UPLOAD__/{$data.image}{else /}__STATIC__/goods/img/noimg.png{/if}">
+                <div class="main-imglist-item-opt" {if !$data.image}style="display:none"{/if}>
+                  <input type="hidden" name="image" value="{$data.image}">
+                  <small><a class="j-category-image-del" href="#">删除</a></small>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <input type="hidden" name="id" value="{$id}">
+          <input type="submit" value="提交表单" class="btn btn-primary">
+          <a href="{:url('index')}" class="btn btn-default">返回列表</a>
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>
+<script>
+  main.ajaxForm('.j-form', function () {
+    main.content("{:url('index')}");
+  });
+  $('.j-upload-category').click(function() {
+    main.modal("{:url('album/show', ['album_id' => $album_id])}", function(modal) {
+      var obj = modal.find('.j-img-selected');
+      if (obj.length > 1) {
+        main.toastr.error('最多只能选择一个。');
+        return false;
+      }
+      if (obj.length < 1) {
+        main.toastr.error('最少选择一个。');
+        return false;
+      }
+      var img = obj.find('img');
+      $('.j-category-image img').attr('src', img.attr('src'));
+      $('.j-category-image input[name=image]').val(img.attr('data-path'));
+      $('.j-category-image .main-imglist-item-opt').show();
+    });
+    return false;
+  });
+  $('.j-category-image-del').click(function() {
+    $('.j-category-image img').attr('src', '__STATIC__/goods/img/noimg.png');
+    $('.j-category-image input[name=image]').val('');
+    $('.j-category-image .main-imglist-item-opt').hide();
+    return false;
+  });
+</script>

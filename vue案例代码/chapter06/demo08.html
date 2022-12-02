@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vuex.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>{{ this.$store.getters }}</p>
+    <p>{{ this.$store.getters.doneTodosCount }}</p>
+  </div>
+  <script>
+    const store = new Vuex.Store({
+      state: {
+        todos: [
+          { id: 1, text: '我已完成', done: true },
+          { id: 2, text: '我没有完成', done: false }
+        ]
+      },
+      getters: {
+        doneTodos: state => {
+          return state.todos.filter(todo => todo.done)
+        },
+        doneTodosCount: (state, getters) => {
+          return getters.doneTodos.length
+        }
+      }
+    })
+    var vm = new Vue({ el: '#app', store })
+  </script>
+</body>
+</html>

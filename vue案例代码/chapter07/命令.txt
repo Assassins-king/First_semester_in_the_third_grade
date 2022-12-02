@@ -1,0 +1,74 @@
+
+7.1.1
+
+npm uninstall vue-cli -g
+
+yarn global remove vue-cli
+
+7.1.2
+
+npm install @vue/cli@3.10 -g
+
+vue -V
+
+vue --version
+
+7.1.3
+
+vue create hello-vue
+
+alias vue='winpty vue.cmd'
+
+cd hello-vue
+npm run serve
+
+7.1.4
+
+mkdir vue-ui
+
+cd vue-ui
+
+vue ui
+
+7.2.2
+
+vue add router
+vue add vuex
+
+vue add vuetify
+
+7.3.1
+
+npx vue-cli-service
+
+npx vue-cli-service help serve
+
+npx vue-cli-service help build
+
+7.3.2
+
+lintOnSave: process.env.NODE_ENV !== 'production'
+
+npm run serve
+
+http://localhost:8081/api/goods
+
+7.3.3
+
+vue add router
+vue add vuex
+
+npm run serve
+
+http://localhost:8080
+
+7.4.4
+
+FOO='bar'
+VUE_APP_SECRET='secret'
+VUE_APP_URL='urlApp'
+
+window.console.log(process.env.VUE_APP_URL)
+
+
+

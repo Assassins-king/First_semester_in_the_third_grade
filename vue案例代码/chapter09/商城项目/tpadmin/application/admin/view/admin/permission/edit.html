@@ -1,0 +1,41 @@
+<div>
+  <div class="main-title">
+    <h2>{if $id}编辑{else}新增{/if}权限</h2>
+  </div>
+  <div class="main-section">
+    <form method="post" action="{:url('save')}" class="j-form">
+      <ul class="form-group form-inline">
+        <li>
+          <select name="admin_role_id" class="form-control" style="min-width:196px;">
+            <option value="0">未选择</option>
+            {foreach $role as $v}
+            <option value="{$v.id}" {if $v.id===$data.admin_role_id}selected{/if}> {$v.name}</option>
+            {/foreach}
+          </select>
+          <label>角色</label>
+        </li>
+        <li>
+          <input type="text" class="form-control" name="controller" value="{$data.controller}" data-toggle="tooltip"
+            data-placement="top" title="使用“*”表示所有控制器" required>
+          <label>允许的控制器</label>
+        </li>
+        <li>
+          <input type="text" class="form-control" name="action" value="{$data.action}" data-toggle="tooltip"
+            data-placement="top" title="使用“,”分隔多个操作，使用“*”表示所有操作" required>
+          <label>允许的操作</label>
+        </li>
+        <li>
+          <input type="hidden" name="id" value="{$id}">
+          <input type="submit" value="提交表单" class="btn btn-primary">
+          <a href="{:url('index', ['admin_role_id' => $data.admin_role_id])}" class="btn btn-default">返回列表</a>
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>
+<script>
+  main.ajaxForm('.j-form', function () {
+    main.content("{:url('index', ['admin_role_id' => $data.admin_role_id])}");
+  });
+  $('[data-toggle="tooltip"]').tooltip();
+</script>

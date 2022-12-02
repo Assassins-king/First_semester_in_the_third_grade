@@ -1,0 +1,91 @@
+<div class="j-album">
+  <div class="main-title">
+    <h2>{$album.name}<small>（{$album.path}）</small></h2>
+  </div>
+  <div class="main-section">
+    <div class="j-upload">
+      <div class="clearfix">
+        <div class="webuploader-file-picker pull-left" style="margin-right:10px;">+ 上传</div>
+        <a href="{:url('deleteImage')}" class="btn btn-danger j-del">
+          <i class="fa fa-trash-o fa-w"></i> 删除</a>
+      </div>
+      <div class="webuploader-status"></div>
+    </div>
+  </div>
+  <div class="main-section" style="max-width:852px">
+    <ul class="main-imglist">
+      {foreach $image as $v}
+      <li>
+        <div class="main-imglist-item j-img" data-id="{$v.id}">
+          <img src="__UPLOAD__/{$album.path}/{$v.path}" data-path="{$album.path}/{$v.path}">
+          <div class="main-imglist-item-mask"><i class="fa fa-check fa-fw"></i></div>
+        </div>
+        <div class="main-imglist-item-opt">
+          <small><a href="__UPLOAD__/{$album.path}/{$v.path}" target="_blank">查看原图</a></small>
+        </div>
+      </li>
+      {/foreach}
+    </ul>
+    {if $image->isEmpty()}
+    <div class="panel panel-default">
+      <div class="panel-body">当前列表暂无图片。</div>
+    </div>
+    {/if}
+    <div class="text-center">{$image|raw}</div>
+  </div>
+  <script>
+    // 在此处编写图片上传功能的JavaScript代码
+    main.loadCSS('__STATIC__/goods/uploader/webuploader.css');
+    main.loadJS('__STATIC__/goods/uploader/webuploader/0.1.5/' + 'webuploader.html5only.min.js');
+    main.loadJS('__STATIC__/goods/uploader/main.uploader.js');
+    (function () {
+      var album = $('.j-album:not(.j-album-enable)').addClass('j-album-enable');
+      main.uploader(album.find('.j-upload'), 'goods_uploader', {
+        url: "{:url('upload', ['album_id' => $album.id, '_ajax' => 1])}",
+        name: 'image',
+        accept: {
+          title: 'Images',
+          extensions: '{$upload_ext}',
+          mimeTypes: 'image/*'
+        },
+        finish: function () {
+          main.ajax("{:url('', ['album_id' => $album.id])}", function (data) {
+            album.replaceWith(data);
+          });
+        }
+      });
+      album.find('.pagination a').click(function () {
+        var url = $(this).attr('href');
+        main.ajax(url, function (data) {
+          album.replaceWith(data);
+          if ($('.modal-open').length === 0) {
+            window.history.pushState(null, null, url);
+          }
+        });
+        return false;
+      });
+      album.find('.j-img').click(function () {
+        $(this).toggleClass('j-img-selected active');
+      });
+      album.find('.j-del').click(function () {
+        var ids = [];
+        album.find('.j-img-selected').each(function () {
+          ids.push($(this).attr('data-id'));
+        });
+        if (ids.length < 1) {
+          main.toastr.error('您没有选择任何图片。');
+          return false;
+        }
+        if (!confirm('您确定要删除选中的' + ids.length + '张图片？')) {
+          return false;
+        }
+        main.ajaxPost({ 'url': $(this).attr('href'), data: { ids: ids } }, function () {
+          main.ajax("{:url('', ['album_id' => $album.id])}", function (data) {
+            album.replaceWith(data);
+          });
+        });
+        return false;
+      });
+    })();
+  </script>
+</div>

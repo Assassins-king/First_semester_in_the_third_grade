@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="vuex.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="asyc">异步操作</button>
+    <p>{{ this.$store.state.count }}</p>
+  </div>
+  <script>
+    var store = new Vuex.Store({
+      state: { count: 0 },
+      mutations: {
+        receive (state) {
+          setTimeout(function () {
+            state.count++
+          }, 1000)
+        }
+      }
+    })
+    var vm = new Vue({
+      el: '#app',
+      store,
+      methods: {
+        asyc () {
+          this.$store.commit('receive')
+        }
+      }
+    })
+  </script>
+</body>
+</html>

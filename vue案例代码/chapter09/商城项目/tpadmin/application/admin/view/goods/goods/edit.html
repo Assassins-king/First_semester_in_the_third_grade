@@ -1,0 +1,235 @@
+<div>
+  <div class="main-title">
+    <h2>{if $id}编辑{else}新增{/if}商品</h2>
+  </div>
+  <div class="main-section">
+    <form method="post" action="{:url('save')}" class="j-form">
+      <ul class="form-group">
+        <li>
+          <label>所属分类</label>
+          <select name="goods_category_id" class="form-control" style="min-width:196px;">
+            <option value="0">---</option>
+            {foreach $category as $v}
+              <optgroup label="{$v.name}">
+                {foreach $v.sub as $vv}
+                  <option value="{$vv.id}" {if $data.goods_category_id==$vv.id}selected{/if}>{$vv.name}</option>
+                {/foreach}
+              </optgroup>
+            {/foreach}
+          </select>
+        </li>
+        <li>
+          <label>商品名称</label>
+          <input type="text" class="form-control" name="name" value="{$data.name}" placeholder="100个字符以内" required>
+        </li>
+        <li>
+          <label>卖点</label>
+          <textarea class="form-control" name="sell_point" placeholder="255个字符以内">{$data.sell_point}</textarea>
+        </li>
+        <li>
+          <label>价格</label>
+          <input type="text" class="form-control" name="price" value="{$data.price}" required>
+        </li>
+        <li>
+          <label>库存量</label>
+          <input type="text" class="form-control" name="num" value="{$data.num}" required>
+        </li>
+        <li>
+          <input type="button" class="btn btn-success j-upload-image" value="上传列表图">
+        </li>
+        <li>
+          <ul class="main-imglist j-goods-image">
+            <li>
+              <div class="main-imglist-item">
+                <img class="j-upload-image" src="{if $data.image}__UPLOAD__/{$data.image}{else /}__STATIC__/goods/img/noimg.png{/if}">
+                <div class="main-imglist-item-opt" {if !$data.image}style="display:none"{/if}>
+                  <input type="hidden" name="image" value="{$data.image}">
+                  <small><a class="j-goods-image-del" href="#">删除</a></small>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <input type="button" class="btn btn-success j-upload-album" value="上传预览图">
+        </li>
+        <li>
+          {foreach $data.album as $v}
+            <input class="j-goods-album-data" type="hidden" value="{$v}">
+          {/foreach}
+          <ul class="main-imglist j-goods-album">
+            <li style="display:none">
+              <div class="main-imglist-item">
+                <img class="j-upload-album" src="__STATIC__/goods/img/noimg.png">
+                <div class="main-imglist-item-opt" style="display:none">
+                  <input type="hidden">
+                  <small><a class="j-goods-album-left" href="#">前移</a></small>
+                  <small><a class="j-goods-album-right" href="#">后移</a></small>
+                  <small><a class="j-goods-album-del" href="#">删除</a></small>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <label>商品详情</label>
+          <div><textarea class="j-goods-content" name="content" style="height:500px">{$data.content}</textarea></div>
+        </li>
+        <li>
+          <label><input type="checkbox" name="status" value="1" {if $data.status}checked{/if}>上架 </label> </li> <li>
+            <input type="hidden" name="id" value="{$id}">
+            <input type="submit" value="提交表单" class="btn btn-primary">
+            <a href="{:url('index')}" class="btn btn-default">返回列表</a>
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>
+<script>
+  main.loadJS('__STATIC__/goods/editor/ueditor1.4.3.3/ueditor.config.js');
+  main.loadJS('__STATIC__/goods/editor/ueditor1.4.3.3/ueditor.all.min.js');
+  main.loadJS('__STATIC__/goods/editor/main.editor.js');
+  main.ajaxForm('.j-form', function () {
+    main.content("{:url('index')}");
+  });
+  $('.j-upload-image').click(function() {
+    main.modal("{:url('album/show', ['album_id'=>$album_image_id])}", function(modal) {
+      var obj = modal.find('.j-img-selected');
+      if (obj.length > 1) {
+        main.toastr.error('最多只能选择一个。');
+        return false;
+      }
+      if (obj.length < 1) {
+        main.toastr.error('最少选择一个。');
+        return false;
+      }
+      var img = obj.find('img');
+      $('.j-goods-image img').attr('src', img.attr('src'));
+      $('.j-goods-image input[name=image]').val(img.attr('data-path'));
+      $('.j-goods-image .main-imglist-item-opt').show();
+    });
+    return false;
+  });
+  $('.j-goods-image-del').click(function() {
+    $('.j-goods-image img').attr('src', '__STATIC__/goods/img/noimg.png');
+    $('.j-goods-image input[name=image]').val('');
+    $('.j-goods-image .main-imglist-item-opt').hide();
+    return false;
+  });
+  (function() {
+    var album = {
+      obj: $('.j-goods-album'), // 图片列表的外层容器对象
+      tmp: null,                // 模板对象
+      // 基于模板创建一个图片项
+      createItem: function() {
+        if (this.tmp === null) {
+          var that = this;
+          var tmp = this.obj.find('li').remove().show();
+          tmp.find('input[type=hidden]').attr('name', 'album[]');
+          tmp.find('.j-goods-album-del').click(function() {
+            $(this).parents('li:eq(0)').remove();
+            if (that.obj.find('li:visible').length === 0) {
+              that.setEmpty();
+            }
+            return false;
+          });
+          tmp.find('.j-goods-album-left').click(function() {
+            var obj = $(this).parents('li:eq(0)');
+            obj.prev('li').before(obj);
+            return false;
+          });
+          tmp.find('.j-goods-album-right').click(function() {
+            var obj = $(this).parents('li:eq(0)');
+            obj.next('li').after(obj);
+            return false;
+          });
+          this.tmp = tmp;
+        }
+        return this.tmp.clone(true);
+      },
+      // 为图片列表追加图片
+      append: function(data) {
+        var that = this;
+        $('.j-goods-album-empty').remove();
+        data = (typeof data === 'object') ? data : [data];
+        $.each(data, function() {
+          var item = that.createItem();
+          item.find('img').attr('src', '__UPLOAD__/' + this);
+          item.find('input[type=hidden]').val(this);
+          item.find('.main-imglist-item-opt').show();
+          item.appendTo(that.obj);
+        });
+      },
+      // 设置图片列表为空列表
+      setEmpty: function() {
+        this.createItem().addClass('j-goods-album-empty').appendTo(this.obj);
+      }
+    };
+    var data = $('.j-goods-album-data');
+    if (data.length === 0) {
+      album.setEmpty();
+    } else {
+      var arr = [];
+      data.each(function() {
+        arr.push($(this).val());
+      });
+      album.append(arr);      // 将原有的图片添加到图片列表中
+    }
+    $('.j-form').on('click', '.j-upload-album', function() {
+      main.modal("{:url('album/show',['album_id'=>$album_album_id])}", function(modal){
+        var obj = modal.find('.j-img-selected');
+        if (obj.length < 1) {
+          main.toastr.error('最少选择一个。');
+          return false;
+        }
+        var img = obj.find('img');
+        var arr = [];
+        img.each(function() {
+          arr.push($(this).attr('data-path'));
+        });
+        album.append(arr);    // 将用户在相册中选择的图片添加到图片列表中
+      });
+      return false;
+    });
+  })();
+  (function() {
+    var name = 'imageupload';
+    UE.ui[name] = function(editor) {
+      editor.registerCommand(name, {
+        execCommand: function() {
+          var that = this;
+          main.modal("{:url('album/show', ['album_id' => $album_editor_id])}", 
+          function(modal) {
+            var obj = modal.find('.j-img-selected');
+            if (obj.length < 1) {
+              main.toastr.error('最少选择一个。');
+              return false;
+            }
+            var img = obj.find('img');
+            var arr = [];
+            img.each(function() {
+              arr.push('<img src="' + $(this).attr('src') + '">');
+            });
+            that.execCommand('insertHtml', arr.join(''));	// 将图片添加到编辑器
+          });
+        }
+      });
+      return new UE.ui.Button({
+        name: name,                                      // 按钮名称
+        title: '上传图片',                                // 按钮提示文本
+        cssRules: 'background-position: -726px -77px;',  // 按钮的图标样式
+        onclick: function() {
+          editor.execCommand(name);                      // 单击按钮时执行的命令
+        }
+      });
+    };
+  })();
+  main.editor($('.j-goods-content'), 'goods_edit', function(opt) {
+    opt.UEDITOR_HOME_URL = '__STATIC__/goods/editor/ueditor1.4.3.3/';
+    opt.toolbars[0].push('imageupload');
+  }, function(editor) {
+    $('.j-form').submit(function() {
+      editor.sync();
+    });
+  });
+</script>
