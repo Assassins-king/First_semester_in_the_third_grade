@@ -12,13 +12,17 @@
        city: <input type="text" v-model="cityName">
       </div>
       <script>
-        var vm = new Vue({
-          el: '#app',
-          data: {
-            cityName: 'shanghai'
-          },
-         
-        })
+       var vm=new Vue({
+              el:'#app',
+              data:{
+                cityName:''
+              },
+              computed:{
+                city:function(){
+                     return this.cityName;
+                }
+              }
+         })
       </script>
 
 
